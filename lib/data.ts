@@ -24,6 +24,7 @@ export interface Project {
   image?: string;
   tags: string[];
   category: string;
+  link?: string;
 }
 
 export interface Certification {
@@ -189,7 +190,8 @@ export const projects: Project[] = [
     description: "Curated collection of GD&T cheat sheets, tolerance analysis guides, DFM references for CNC, sheet metal, and injection molding — built as a one-stop engineering resource for dimensional management.",
     image: "/assets/projects/gdt-cover.png",
     tags: ["GD&T", "ASME Y14.5", "Tolerance Analysis", "DFM Guides"],
-    category: "GD&T"
+    category: "GD&T",
+    link: "/tolerance-stackup-analysis.html"
   },
   {
     id: 2,
@@ -204,7 +206,8 @@ export const projects: Project[] = [
     description: "Comprehensive visual reference covering all 12 CATIA V5 workbenches — Sketcher, Part Design, Assembly, Drafting, GSD, Wireframe, Sheet Metal, Weld, Mold, DMU Navigator, Analysis, and Electrical Design.",
     image: "/assets/projects/catia-poster.jpeg",
     tags: ["CATIA V5", "CAD Reference", "All Workbenches"],
-    category: "CAD"
+    category: "CAD",
+    link: "https://claude.ai/public/artifacts/b0859b0a-51d0-40b7-8c73-f092f2285db8"
   },
   {
     id: 4,

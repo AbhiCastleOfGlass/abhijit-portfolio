@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "@/lib/data";
-import { X, Microscope, Zap, FileText } from "lucide-react";
+import { X, Microscope, Zap, FileText, ExternalLink } from "lucide-react";
 
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
@@ -64,7 +64,13 @@ export default function Projects() {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="bg-card border border-border rounded-xl overflow-hidden group hover:-translate-y-1.5 transition-all duration-300 hover:shadow-xl hover:border-primary/50 flex flex-col h-full cursor-pointer"
-              onClick={() => project.image && setSelectedProject(project.image)}
+              onClick={() => {
+                if (project.link) {
+                  window.open(project.link, '_blank');
+                } else if (project.image) {
+                  setSelectedProject(project.image);
+                }
+              }}
             >
               {/* Cover Image or Placeholder */}
               <div className={`relative h-56 w-full ${getBackgroundForCategory(project.category)} flex items-center justify-center overflow-hidden`}>
@@ -77,7 +83,14 @@ export default function Projects() {
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
-                    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300" />
+                    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300 flex items-center justify-center">
+                      {project.link && (
+                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-primary/90 text-white font-semibold py-2 px-5 rounded-full shadow-lg flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 backdrop-blur-sm border border-white/20">
+                          <ExternalLink size={16} />
+                          View Project
+                        </div>
+                      )}
+                    </div>
                   </>
                 ) : (
                   getProjectIcon(project.category)

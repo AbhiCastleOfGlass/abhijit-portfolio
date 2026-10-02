@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stack-Up · Tolerance Chain Analysis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#100b09;
+    --bg-grid: rgba(255,140,26,.07);
+    --surface:#1c130d;
+    --surface-2:#241a12;
+    --surface-3:#2f2216;
+    --border:#4a3420;
+    --border-soft:#33261a;
+    --text:#fff3e6;
+    --text-mid:#e0b98c;
+    --text-muted:#95795c;
+    --amber:#ff7a1a;
+    --teal:#3d8bff;
+    --violet:#ffd23f;
+    --pass:#37e07a;
+    --fail:#ff3b3b;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+    --disp: 'Anton', var(--sans);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(255,122,26,.16), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 0%, rgba(61,139,255,.10), transparent 55%),
+      radial-gradient(var(--bg-grid) 1.5px, transparent 1.5px) 0 0/18px 18px,
+      var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  ::selection{background:var(--amber); color:#1a1300;}
+  a{color:inherit;}
+
+  .wrap{max-width:1240px; margin:0 auto; padding:28px 24px 80px;}
+
+  /* Header */
+  header.top{
+    display:flex; align-items:flex-start; justify-content:space-between; gap:24px;
+    padding-bottom:22px; margin-bottom:26px; border-bottom:1px solid var(--border-soft);
+  }
+  .brand{display:flex; align-items:center; gap:14px;}
+  .brand-mark{
+    width:44px; height:44px; border-radius:50%;
+    background: radial-gradient(circle at 32% 28%, #fff8ec 0%, #ffcf7a 16%, var(--amber) 42%, #b8420a 78%, #5c1f00 100%);
+    display:flex; align-items:center; justify-content:center; position:relative; flex:none;
+    box-shadow: 0 0 0 1px var(--border), 0 0 16px rgba(255,122,26,.55), inset -3px -3px 6px rgba(0,0,0,.35), inset 2px 3px 5px rgba(255,255,255,.35);
+  }
+  .brand-mark svg{position:absolute; width:44px; height:44px;}
+  h1{font-family:var(--disp); font-size:28px; font-weight:400; margin:0; letter-spacing:.03em; text-transform:uppercase;
+    background:linear-gradient(90deg, #fff3e6, var(--violet) 60%, var(--amber));
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+    text-shadow: 0 0 22px rgba(255,122,26,.25);
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.14em;
+    color:var(--text-muted); margin:0 0 3px;
+  }
+  .top-meta{text-align:right; font-family:var(--mono); font-size:11.5px; color:var(--text-muted); line-height:1.7;}
+  .top-meta b{color:var(--text-mid); font-weight:500;}
+
+  .intro{max-width:760px; color:var(--text-mid); font-size:14.5px; line-height:1.65; margin-bottom:28px;}
+  .intro strong{color:var(--text);}
+
+  .howto{
+    background:var(--surface); border:1px solid var(--border-soft); border-radius:14px;
+    padding:20px 22px 22px; margin-bottom:26px;
+  }
+  .howto-head{display:flex; align-items:center; gap:10px; margin-bottom:16px;}
+  .howto-head h2{font-family:var(--disp); font-size:19px; font-weight:400; letter-spacing:.02em; text-transform:uppercase; margin:0;}
+  .howto-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:14px;}
+  @media (max-width:900px){ .howto-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:520px){ .howto-grid{grid-template-columns:1fr;} }
+  .howto-step{position:relative; padding-left:2px;}
+  .step-num{
+    width:30px; height:30px; border-radius:8px; display:flex; align-items:center; justify-content:center;
+    font-family:var(--disp); font-size:16px; margin-bottom:9px; color:#160c07;
+  }
+  .howto-step:nth-child(1) .step-num{background:var(--amber);}
+  .howto-step:nth-child(2) .step-num{background:var(--teal); color:#071a33;}
+  .howto-step:nth-child(3) .step-num{background:var(--violet);}
+  .howto-step:nth-child(4) .step-num{background:var(--pass); color:#062e18;}
+  .howto-step:nth-child(5) .step-num{background:var(--fail); color:#2e0505;}
+  .howto-step h3{font-size:13px; margin:0 0 5px; font-weight:600; color:var(--text);}
+  .howto-step p{margin:0; font-size:12.3px; color:var(--text-mid); line-height:1.55;}
+
+  .methods-strip{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    background:var(--border-soft); border:1px solid var(--border-soft); border-radius:12px;
+    overflow:hidden; margin-bottom:34px;
+  }
+  .method-card{background:var(--surface); padding:16px 18px;}
+  .method-card .tag{
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
+    display:inline-flex; align-items:center; gap:7px; margin-bottom:8px;
+  }
+  .dot{width:7px; height:7px; border-radius:50%; display:inline-block;}
+  .method-card p{margin:0; font-size:13px; color:var(--text-mid); line-height:1.55;}
+
+  /* Layout */
+  .grid{display:grid; grid-template-columns: 1.5fr 1fr; gap:22px; align-items:start;}
+  @media (max-width:980px){ .grid{grid-template-columns:1fr;} }
+
+  .panel{
+    background:var(--surface); border:1px solid var(--border-soft); border-radius:14px;
+    padding:20px 20px 22px;
+  }
+  .panel + .panel{margin-top:22px;}
+  .panel-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; gap:10px; flex-wrap:wrap;}
+  .panel-title{font-family:var(--disp); font-size:19px; font-weight:400; letter-spacing:.02em; text-transform:uppercase; margin:0;}
+  .panel-sub{font-size:12px; color:var(--text-muted); margin-top:2px;}
+
+  .field-row{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:10px;}
+  .field{display:flex; flex-direction:column; gap:5px;}
+  .field label{font-size:11px; color:var(--text-muted); font-family:var(--mono); letter-spacing:.03em;}
+  input[type=text], input[type=number], select{
+    background:var(--surface-2); border:1px solid var(--border); color:var(--text);
+    border-radius:8px; padding:8px 10px; font-family:var(--mono); font-size:13px;
+    width:100%; outline:none; transition:border-color .15s, background .15s;
+  }
+  input[type=text]::placeholder{font-family:var(--sans); color:var(--text-muted);}
+  input:focus, select:focus{border-color:var(--teal); background:var(--surface-3);}
+  select{appearance:none; -webkit-appearance:none; cursor:pointer;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0l5 6 5-6z' fill='%237688a8'/></svg>");
+    background-repeat:no-repeat; background-position:right 10px center; padding-right:26px;
+  }
+
+  .unit-toggle{display:inline-flex; border:1px solid var(--border); border-radius:8px; overflow:hidden;}
+  .unit-toggle button{
+    background:var(--surface-2); color:var(--text-muted); border:none; font-family:var(--mono);
+    font-size:12px; padding:6px 12px; cursor:pointer;
+  }
+  .unit-toggle button.active{background:var(--teal); color:#071a33; font-weight:600;}
+
+  .mode-toggle{display:inline-flex; gap:6px; background:var(--surface-2); padding:4px; border-radius:10px; border:1px solid var(--border);}
+  .mode-toggle button{
+    background:transparent; border:none; color:var(--text-muted); font-family:var(--mono);
+    font-size:12px; padding:7px 14px; border-radius:7px; cursor:pointer; letter-spacing:.03em;
+  }
+  .mode-toggle button.active{background:var(--surface-3); color:var(--text); box-shadow: inset 0 0 0 1px var(--border);}
+
+  /* Chain diagram */
+  .chain-svg{width:100%; display:block; margin:4px 0 18px;}
+
+  /* Contributor table */
+  table.contrib{width:100%; border-collapse:collapse; font-size:13px;}
+  table.contrib thead th{
+    text-align:left; font-family:var(--mono); font-size:10.5px; text-transform:uppercase;
+    letter-spacing:.06em; color:var(--text-muted); font-weight:500; padding:0 8px 8px 4px;
+    border-bottom:1px solid var(--border-soft);
+  }
+  table.contrib td{padding:6px 8px 6px 4px; vertical-align:middle;}
+  table.contrib tr.row-line td{border-bottom:1px dashed var(--border-soft);}
+  .name-input{min-width:120px;}
+  .num-input{width:82px;}
+  .sign-btn{
+    width:34px; height:34px; border-radius:8px; border:1px solid var(--border); background:var(--surface-2);
+    color:var(--text); font-family:var(--mono); font-size:15px; cursor:pointer; line-height:1;
+  }
+  .sign-btn[data-sign="1"]{color:var(--teal); border-color:var(--teal);}
+  .sign-btn[data-sign="-1"]{color:var(--amber); border-color:var(--amber);}
+  .dist-select{width:96px;}
+  .del-btn{
+    background:transparent; border:1px solid var(--border); color:var(--text-muted); width:30px; height:30px;
+    border-radius:8px; cursor:pointer; font-size:14px; line-height:1;
+  }
+  .del-btn:hover{color:var(--fail); border-color:var(--fail);}
+
+  .table-actions{display:flex; gap:10px; margin-top:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:12px; letter-spacing:.02em; padding:9px 14px; border-radius:8px;
+    cursor:pointer; border:1px solid var(--border); background:var(--surface-2); color:var(--text);
+    transition: border-color .15s, background .15s, transform .1s;
+  }
+  .btn:hover{border-color:var(--teal);}
+  .btn:active{transform:scale(.97);}
+  .btn.primary{background:var(--teal); color:#071a33; border-color:var(--teal); font-weight:600;}
+  .btn.primary:hover{filter:brightness(1.08);}
+  .btn.ghost{background:transparent;}
+  .hint{font-size:11.5px; color:var(--text-muted); margin-top:10px; line-height:1.5;}
+
+  /* Results */
+  .verdict-card{
+    border-radius:12px; padding:16px 18px; margin-bottom:16px; border:1px solid var(--border);
+    background:var(--surface-2);
+  }
+  .verdict-card.pass{border-color:rgba(55,224,122,.5); background:linear-gradient(180deg, rgba(55,224,122,.09), var(--surface-2));}
+  .verdict-card.fail{border-color:rgba(255,59,59,.5); background:linear-gradient(180deg, rgba(255,59,59,.1), var(--surface-2));}
+  .verdict-label{font-family:var(--disp); font-size:20px; font-weight:400; letter-spacing:.02em; text-transform:uppercase; display:flex; align-items:center; gap:9px;}
+  .verdict-label .pip{width:9px; height:9px; border-radius:50%;}
+  .verdict-card.pass .verdict-label .pip{background:var(--pass); box-shadow:0 0 8px var(--pass);}
+  .verdict-card.fail .verdict-label .pip{background:var(--fail); box-shadow:0 0 8px var(--fail);}
+  .verdict-detail{font-size:12.5px; color:var(--text-mid); margin-top:5px; font-family:var(--mono);}
+
+  .gauge-title{font-family:var(--mono); font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px;}
+  .gauge-svg{width:100%; display:block;}
+  .legend{display:flex; gap:16px; flex-wrap:wrap; margin-top:10px; font-size:11.5px; color:var(--text-mid); font-family:var(--mono);}
+  .legend span{display:inline-flex; align-items:center; gap:6px;}
+  .legend i{width:10px; height:10px; border-radius:3px; display:inline-block;}
+
+  table.compare{width:100%; border-collapse:collapse; margin-top:16px; font-size:12.5px;}
+  table.compare th{
+    text-align:left; font-family:var(--mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.06em;
+    color:var(--text-muted); font-weight:500; padding:6px 6px; border-bottom:1px solid var(--border-soft);
+  }
+  table.compare td{padding:8px 6px; font-family:var(--mono); border-bottom:1px solid var(--border-soft);}
+  table.compare tr:last-child td{border-bottom:none;}
+  .status-pill{
+    display:inline-block; padding:2px 9px; border-radius:20px; font-size:10.5px; letter-spacing:.03em;
+  }
+  .status-pill.pass{background:rgba(55,224,122,.14); color:var(--pass);}
+  .status-pill.fail{background:rgba(255,59,59,.14); color:var(--fail);}
+
+  .stat-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:16px;}
+  .stat{background:var(--surface-2); border:1px solid var(--border-soft); border-radius:10px; padding:10px 12px;}
+  .stat .k{font-family:var(--mono); font-size:10px; color:var(--text-muted); text-transform:uppercase; letter-spacing:.06em;}
+  .stat .v{font-family:var(--mono); font-size:16px; font-weight:600; margin-top:3px;}
+
+  .contrib-bars{margin-top:16px;}
+  .cbar-row{display:grid; grid-template-columns: 20px 1fr 44px; gap:10px; align-items:center; margin-bottom:8px; font-size:12px;}
+  .cbar-row .rank{font-family:var(--mono); color:var(--text-muted); font-size:11px;}
+  .cbar-track{background:var(--surface-2); border-radius:6px; height:9px; overflow:hidden; position:relative;}
+  .cbar-fill{height:100%; border-radius:6px;}
+  .cbar-row .pct{font-family:var(--mono); font-size:11.5px; text-align:right; color:var(--text-mid);}
+  .cbar-name{position:absolute; left:0; top:-16px; font-size:11px; color:var(--text-mid);}
+
+  details.math{margin-top:18px; border-top:1px solid var(--border-soft); padding-top:14px;}
+  details.math summary{
+    cursor:pointer; font-family:var(--mono); font-size:12px; color:var(--text-mid); letter-spacing:.03em;
+    list-style:none; display:flex; align-items:center; gap:6px;
+  }
+  details.math summary::-webkit-details-marker{display:none;}
+  details.math summary::before{content:"▸"; color:var(--teal); transition:transform .15s;}
+  details.math[open] summary::before{transform:rotate(90deg);}
+  .math-body{font-family:var(--mono); font-size:12px; color:var(--text-mid); line-height:2; margin-top:10px;}
+  .math-body .eq{color:var(--text);}
+
+  footer{margin-top:40px; padding-top:18px; border-top:1px solid var(--border-soft); font-size:11.5px; color:var(--text-muted); font-family:var(--mono); line-height:1.7;}
+  footer a{color:var(--teal); text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+
+  @media (max-width:640px){
+    .field-row{grid-template-columns:1fr 1fr;}
+    .stat-grid{grid-template-columns:1fr;}
+    .methods-strip{grid-template-columns:1fr;}
+    header.top{flex-direction:column;}
+    .top-meta{text-align:left;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 44 44" fill="none">
+          <path d="M22 10 L24.4 18.4 L33 20.8 L24.4 23.2 L22 31.6 L19.6 23.2 L11 20.8 L19.6 18.4 Z" fill="#fff3e6" opacity="0.92"/>
+          <circle cx="32.5" cy="12" r="2" fill="#fff3e6" opacity="0.85"/>
+          <circle cx="11.5" cy="30.5" r="1.3" fill="#fff3e6" opacity="0.7"/>
+        </svg>
+      </div>
+      <div>
+        <p class="eyebrow">Tolerance analysis</p>
+        <h1>Stack-Up</h1>
+      </div>
+    </div>
+    <div class="top-meta">
+      <div>Results update live as you edit</div>
+      <div><b>Ref.</b> ASME Y14.5 · RSS &amp; Monte Carlo per standard tolerance-analysis practice</div>
+    </div>
+  </header>
+
+  <p class="intro">
+    A tolerance stack-up sums the variation of every feature in a dimension chain to predict whether an assembled
+    result — a gap, a fit, an alignment — holds within spec. Build the chain below and check it three ways:
+    <strong>worst case</strong>, <strong>RSS</strong>, and a <strong>10,000-sample Monte Carlo</strong>.
+  </p>
+
+  <div class="howto">
+    <div class="howto-head"><h2>How to use it</h2></div>
+    <div class="howto-grid">
+      <div class="howto-step">
+        <div class="step-num">1</div>
+        <h3>Set the requirement</h3>
+        <p>Name the gap, fit, or alignment you're checking and enter its lower and upper spec limits (target is optional).</p>
+      </div>
+      <div class="howto-step">
+        <div class="step-num">2</div>
+        <h3>Build the chain</h3>
+        <p>Click "Add contributor" for every feature in the path — each part dimension that affects the result. Or hit "Load example" to see one filled in.</p>
+      </div>
+      <div class="howto-step">
+        <div class="step-num">3</div>
+        <h3>Set direction &amp; tolerance</h3>
+        <p>Toggle + / − to set which way each contributor pushes the stack, enter its nominal and ± tolerance, and pick Normal or Uniform distribution.</p>
+      </div>
+      <div class="howto-step">
+        <div class="step-num">4</div>
+        <h3>Read the verdict</h3>
+        <p>The results panel updates live — check the pass/fail call, the spec-fit gauge, and how Worst Case, RSS, and Monte Carlo compare.</p>
+      </div>
+      <div class="howto-step">
+        <div class="step-num">5</div>
+        <h3>Tighten it up</h3>
+        <p>If it fails, open "Top contributors" to see which feature drives the most variation, and "Show the math" to see exactly how each number was derived.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="methods-strip">
+    <div class="method-card">
+      <div class="tag"><span class="dot" style="background:var(--amber)"></span>Worst case</div>
+      <p>Sums every tolerance at its extreme. Conservative — use it for safety-critical or non-adjustable features.</p>
+    </div>
+    <div class="method-card">
+      <div class="tag"><span class="dot" style="background:var(--teal)"></span>RSS</div>
+      <p>Treats contributors as independent normal distributions and reports nominal ± √(Σ tol²). Realistic for controlled processes.</p>
+    </div>
+    <div class="method-card">
+      <div class="tag"><span class="dot" style="background:var(--violet)"></span>Monte Carlo</div>
+      <p>Simulates 10,000 assemblies from each contributor's assigned distribution and reports actual yield against spec.</p>
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- BUILD PANEL -->
+    <div>
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <h2 class="panel-title">Requirement</h2>
+            <p class="panel-sub">Name the dimension and set its spec limits.</p>
+          </div>
+          <div class="unit-toggle">
+            <button id="unitMM" class="active">mm</button>
+            <button id="unitIN">in</button>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field" style="grid-column:span 3;">
+            <label>Requirement name</label>
+            <input type="text" id="reqName" placeholder="e.g. Bracket-to-housing gap">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Lower spec</label>
+            <input type="number" step="any" id="specLo" placeholder="min">
+          </div>
+          <div class="field">
+            <label>Target (optional)</label>
+            <input type="number" step="any" id="specMid" placeholder="nominal">
+          </div>
+          <div class="field">
+            <label>Upper spec</label>
+            <input type="number" step="any" id="specHi" placeholder="max">
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <h2 class="panel-title">Dimension chain</h2>
+            <p class="panel-sub">Each row is a feature in the stack. Sign sets its direction along the chain.</p>
+          </div>
+        </div>
+
+        <svg class="chain-svg" id="chainSvg" height="54" viewBox="0 0 1000 54" preserveAspectRatio="none"></svg>
+
+        <table class="contrib">
+          <thead>
+            <tr>
+              <th style="width:26%">Name</th>
+              <th>Nominal</th>
+              <th>+Tol</th>
+              <th>−Tol</th>
+              <th>Sign</th>
+              <th>Distribution</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="contribBody"></tbody>
+        </table>
+
+        <div class="table-actions">
+          <button class="btn primary" id="addRow">+ Add contributor</button>
+          <button class="btn ghost" id="loadExample">Load example</button>
+          <button class="btn ghost" id="clearAll">Clear all</button>
+        </div>
+        <p class="hint">Blank tolerances are treated as zero. Rows with no name or no nominal value are skipped from the calculation.</p>
+      </div>
+    </div>
+
+    <!-- RESULTS PANEL -->
+    <div>
+      <div class="panel" style="position:sticky; top:20px;">
+        <div class="panel-head">
+          <h2 class="panel-title">Results</h2>
+        </div>
+
+        <div id="verdictCard" class="verdict-card">
+          <div class="verdict-label"><span class="pip"></span><span id="verdictText">Add contributors to see a verdict</span></div>
+          <div class="verdict-detail" id="verdictDetail"></div>
+        </div>
+
+        <div class="gauge-title">Spec fit</div>
+        <svg class="gauge-svg" id="gaugeSvg" height="150" viewBox="0 0 560 150" preserveAspectRatio="none"></svg>
+        <div class="legend">
+          <span><i style="background:var(--amber)"></i>Worst case</span>
+          <span><i style="background:var(--teal)"></i>RSS</span>
+          <span><i style="background:var(--violet)"></i>Monte Carlo</span>
+          <span><i style="background:var(--text-muted); width:2px; border-radius:0;"></i>Spec limit</span>
+        </div>
+
+        <table class="compare">
+          <thead><tr><th>Method</th><th>Range</th><th>Status</th></tr></thead>
+          <tbody id="compareBody"></tbody>
+        </table>
+
+        <div class="stat-grid">
+          <div class="stat"><div class="k">MC yield</div><div class="v" id="statYield">—</div></div>
+          <div class="stat"><div class="k">Worst-case range</div><div class="v" id="statRange">—</div></div>
+          <div class="stat"><div class="k">DPMO</div><div class="v" id="statDpmo">—</div></div>
+        </div>
+
+        <div class="contrib-bars" id="contribBars"></div>
+
+        <details class="math">
+          <summary>Show the math</summary>
+          <div class="math-body" id="mathBody"></div>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Preliminary / convenience tool — verify results against your governing specification before design release.
+    Reference: ASME Y14.5 (GD&amp;T) for positional-tolerance framework; RSS and Monte&nbsp;Carlo follow standard
+    statistical tolerance-analysis practice.
+  </footer>
+</div>
+
+<script>
+(function(){
+  const state = { unit:'mm', rows:[] };
+  let rowId = 0;
+  const MM_PER_IN = 25.4;
+
+  const body = document.getElementById('contribBody');
+  const chainSvg = document.getElementById('chainSvg');
+  const gaugeSvg = document.getElementById('gaugeSvg');
+
+  function newRow(vals){
+    rowId++;
+    return Object.assign({ id: rowId, name:'', nominal:'', pos:'', neg:'', sign:1, dist:'normal' }, vals||{});
+  }
+
+  function addRow(vals){
+    state.rows.push(newRow(vals));
+    renderRows();
+    compute();
+  }
+
+  function removeRow(id){
+    state.rows = state.rows.filter(r=>r.id!==id);
+    renderRows();
+    compute();
+  }
+
+  function renderRows(){
+    body.innerHTML = '';
+    state.rows.forEach((r, idx)=>{
+      const tr = document.createElement('tr');
+      tr.className = 'row-line';
+      tr.innerHTML = `
+        <td><input type="text" class="name-input" data-field="name" data-id="${r.id}" placeholder="Contributor ${idx+1} name" value="${r.name}"></td>
+        <td><input type="number" step="any" class="num-input" data-field="nominal" data-id="${r.id}" placeholder="0.000" value="${r.nominal}"></td>
+        <td><input type="number" step="any" class="num-input" data-field="pos" data-id="${r.id}" placeholder="0.000" value="${r.pos}"></td>
+        <td><input type="number" step="any" class="num-input" data-field="neg" data-id="${r.id}" placeholder="0.000" value="${r.neg}"></td>
+        <td><button class="sign-btn" data-id="${r.id}" data-sign="${r.sign}">${r.sign>0?'+':'−'}</button></td>
+        <td>
+          <select class="dist-select" data-field="dist" data-id="${r.id}">
+            <option value="normal" ${r.dist==='normal'?'selected':''}>Normal</option>
+            <option value="uniform" ${r.dist==='uniform'?'selected':''}>Uniform</option>
+          </select>
+        </td>
+        <td><button class="del-btn" data-id="${r.id}" title="Remove">✕</button></td>
+      `;
+      body.appendChild(tr);
+    });
+
+    body.querySelectorAll('input, select').forEach(el=>{
+      el.addEventListener('input', onFieldChange);
+      el.addEventListener('change', onFieldChange);
+    });
+    body.querySelectorAll('.sign-btn').forEach(el=>{
+      el.addEventListener('click', ()=>{
+        const id = Number(el.dataset.id);
+        const row = state.rows.find(r=>r.id===id);
+        row.sign = row.sign > 0 ? -1 : 1;
+        renderRows();
+        compute();
+      });
+    });
+    body.querySelectorAll('.del-btn').forEach(el=>{
+      el.addEventListener('click', ()=> removeRow(Number(el.dataset.id)));
+    });
+  }
+
+  function onFieldChange(e){
+    const id = Number(e.target.dataset.id);
+    const field = e.target.dataset.field;
+    const row = state.rows.find(r=>r.id===id);
+    if(!row) return;
+    row[field] = e.target.value;
+    compute();
+  }
+
+  document.getElementById('addRow').addEventListener('click', ()=> addRow());
+  document.getElementById('clearAll').addEventListener('click', ()=>{
+    state.rows = [];
+    renderRows();
+    compute();
+  });
+  document.getElementById('loadExample').addEventListener('click', ()=>{
+    document.getElementById('reqName').value = 'Bracket-to-housing gap';
+    document.getElementById('specLo').value = 0.10;
+    document.getElementById('specMid').value = '';
+    document.getElementById('specHi').value = 0.70;
+    state.rows = [
+      newRow({name:'Housing pocket depth', nominal:12.70, pos:0.15, neg:0.15, sign:1, dist:'normal'}),
+      newRow({name:'Component height', nominal:12.00, pos:0.10, neg:0.10, sign:-1, dist:'normal'}),
+      newRow({name:'Spacer thickness', nominal:0.32, pos:0.05, neg:0.05, sign:-1, dist:'uniform'}),
+    ];
+    renderRows();
+    compute();
+  });
+
+  // Units
+  document.getElementById('unitMM').addEventListener('click', ()=> setUnit('mm'));
+  document.getElementById('unitIN').addEventListener('click', ()=> setUnit('in'));
+  function setUnit(u){
+    if(u === state.unit) return;
+    const factor = u === 'in' ? (1/MM_PER_IN) : MM_PER_IN;
+    ['specLo','specMid','specHi'].forEach(id=>{
+      const el = document.getElementById(id);
+      if(el.value !== '') el.value = round(Number(el.value)*factor, 5);
+    });
+    state.rows.forEach(r=>{
+      ['nominal','pos','neg'].forEach(f=>{
+        if(r[f] !== '') r[f] = round(Number(r[f])*factor, 5);
+      });
+    });
+    state.unit = u;
+    document.getElementById('unitMM').classList.toggle('active', u==='mm');
+    document.getElementById('unitIN').classList.toggle('active', u==='in');
+    renderRows();
+    compute();
+  }
+  function round(n,d){ const p = Math.pow(10,d); return Math.round(n*p)/p; }
+
+  ['specLo','specMid','specHi','reqName'].forEach(id=>{
+    document.getElementById(id).addEventListener('input', compute);
+  });
+
+  // ---------- math ----------
+  function gaussianRandom(){
+    let u=0, v=0;
+    while(u===0) u = Math.random();
+    while(v===0) v = Math.random();
+    return Math.sqrt(-2*Math.log(u)) * Math.cos(2*Math.PI*v);
+  }
+
+  function validContributors(){
+    return state.rows
+      .map(r=>({
+        name: r.name && r.name.trim() ? r.name.trim() : null,
+        nominal: r.nominal === '' ? NaN : Number(r.nominal),
+        pos: r.pos === '' ? 0 : Number(r.pos),
+        neg: r.neg === '' ? 0 : Number(r.neg),
+        sign: r.sign,
+        dist: r.dist,
+      }))
+      .filter(c => c.name && !isNaN(c.nominal));
+  }
+
+  function fmt(n, dp){
+    dp = dp === undefined ? 4 : dp;
+    if(n === null || n === undefined || isNaN(n)) return '—';
+    const s = n.toFixed(dp);
+    return (n >= 0 ? '+' : '') + s;
+  }
+  function unitLbl(){ return state.unit; }
+
+  function compute(){
+    const cs = validContributors();
+    const specLo = parseFloatOrNull(document.getElementById('specLo').value);
+    const specHi = parseFloatOrNull(document.getElementById('specHi').value);
+    const specMid = parseFloatOrNull(document.getElementById('specMid').value);
+    const lo = specLo === null ? -Infinity : specLo;
+    const hi = specHi === null ? Infinity : specHi;
+
+    drawChain(cs);
+
+    if(cs.length === 0){
+      document.getElementById('verdictText').textContent = 'Add contributors to see a verdict';
+      document.getElementById('verdictDetail').textContent = '';
+      document.getElementById('verdictCard').className = 'verdict-card';
+      document.getElementById('compareBody').innerHTML = '';
+      document.getElementById('statYield').textContent = '—';
+      document.getElementById('statRange').textContent = '—';
+      document.getElementById('statDpmo').textContent = '—';
+      document.getElementById('contribBars').innerHTML = '';
+      document.getElementById('mathBody').innerHTML = '';
+      drawGauge(null);
+      return;
+    }
+
+    // Nominal
+    const nominal = cs.reduce((s,c)=> s + c.sign*c.nominal, 0);
+
+    // Worst case
+    let wcMin = 0, wcMax = 0;
+    cs.forEach(c=>{
+      const rlo = c.nominal - c.neg, rhi = c.nominal + c.pos;
+      if(c.sign > 0){ wcMin += rlo; wcMax += rhi; }
+      else { wcMin += -rhi; wcMax += -rlo; }
+    });
+
+    // RSS
+    const tVals = cs.map(c => (c.pos + c.neg) / 2);
+    const rssVal = Math.sqrt(tVals.reduce((s,t)=> s + t*t, 0));
+    const rssMin = nominal - rssVal, rssMax = nominal + rssVal;
+
+    // Monte Carlo
+    const N = 10000;
+    let inSpec = 0, sum = 0, sumSq = 0;
+    for(let i=0;i<N;i++){
+      let total = 0;
+      for(const c of cs){
+        const t = (c.pos + c.neg) / 2;
+        let val;
+        if(c.dist === 'uniform'){
+          val = (c.nominal - c.neg) + Math.random() * (c.pos + c.neg);
+        } else {
+          const sigma = t / 3;
+          val = c.nominal + sigma * gaussianRandom();
+        }
+        total += c.sign * val;
+      }
+      sum += total; sumSq += total*total;
+      if(total >= lo && total <= hi) inSpec++;
+    }
+    const mcMean = sum / N;
+    const mcStd = Math.sqrt(Math.max(0, sumSq/N - mcMean*mcMean));
+    const mcYield = inSpec / N;
+    const dpmo = Math.round((1 - mcYield) * 1e6);
+    // MC "range" reported as observed min/max is noisy; use ±3sigma about mean for reporting consistency
+    const mcMin = mcMean - 3*mcStd, mcMax = mcMean + 3*mcStd;
+
+    // Verdict — worst case governs pass/fail per convention
+    const passWC = wcMin >= lo && wcMax <= hi;
+    const margin = Math.min(
+      isFinite(lo) ? (wcMin - lo) : Infinity,
+      isFinite(hi) ? (hi - wcMax) : Infinity
+    );
+    const card = document.getElementById('verdictCard');
+    card.className = 'verdict-card ' + (passWC ? 'pass' : 'fail');
+    document.getElementById('verdictText').textContent = passWC ? 'Passes worst case' : 'Fails worst case';
+    document.getElementById('verdictDetail').textContent =
+      isFinite(margin) ? `${fmt(Math.abs(margin))} ${unitLbl()} margin to nearest spec limit` : 'Set both spec limits to compute margin';
+
+    // Compare table
+    const rows = [
+      {name:'Worst Case', min:wcMin, max:wcMax, pass: passWC},
+      {name:'RSS', min:rssMin, max:rssMax, pass: rssMin>=lo && rssMax<=hi},
+      {name:'Monte Carlo', min:mcMin, max:mcMax, pass: mcYield >= 0.9973},
+    ];
+    document.getElementById('compareBody').innerHTML = rows.map(r=>`
+      <tr>
+        <td>${r.name}</td>
+        <td>${fmt(r.min)} to ${fmt(r.max)} ${unitLbl()}</td>
+        <td><span class="status-pill ${r.pass?'pass':'fail'}">${r.pass?'Pass':'Fail'}</span></td>
+      </tr>
+    `).join('') + `
+      <tr>
+        <td>Nominal</td>
+        <td colspan="2">${fmt(nominal)} ${unitLbl()}</td>
+      </tr>
+    `;
+
+    document.getElementById('statYield').textContent = (mcYield*100).toFixed(mcYield>=0.9995?1:2) + '%';
+    document.getElementById('statRange').textContent = fmt(wcMax-wcMin) + ' ' + unitLbl();
+    document.getElementById('statDpmo').textContent = dpmo.toLocaleString();
+
+    // Sensitivity / top contributors (share of RSS variance)
+    const varSum = tVals.reduce((s,t)=> s + t*t, 0) || 1;
+    const contribs = cs.map((c,i)=> ({name:c.name, pct: (tVals[i]*tVals[i]/varSum)*100}))
+      .sort((a,b)=> b.pct - a.pct);
+    const colors = ['var(--amber)','var(--teal)','var(--violet)','#c9915c'];
+    document.getElementById('contribBars').innerHTML =
+      '<div class="gauge-title">Top contributors</div>' +
+      contribs.slice(0,5).map((c,i)=>`
+        <div class="cbar-row">
+          <div class="rank">#${i+1}</div>
+          <div class="cbar-track"><div class="cbar-fill" style="width:${Math.max(c.pct,1.5)}%; background:${colors[i%colors.length]}"></div></div>
+          <div class="pct">${c.pct.toFixed(0)}%</div>
+        </div>
+        <div style="font-size:11px; color:var(--text-muted); margin:-5px 0 8px 30px;">${c.name}</div>
+      `).join('');
+
+    // Math panel
+    document.getElementById('mathBody').innerHTML = `
+      Nominal &nbsp;Σ(sign · nominal) &nbsp;=&nbsp; <span class="eq">${fmt(nominal)} ${unitLbl()}</span><br>
+      Worst case &nbsp;Σ mins … Σ maxes &nbsp;=&nbsp; <span class="eq">${fmt(wcMin)} to ${fmt(wcMax)} ${unitLbl()}</span> &nbsp;(spread ${fmt(wcMax-wcMin,4).replace('+','')} ${unitLbl()})<br>
+      RSS &nbsp;nominal ± √(Σ tolᵢ²) &nbsp;=&nbsp; <span class="eq">${fmt(rssMin)} to ${fmt(rssMax)} ${unitLbl()}</span> &nbsp;(σ<sub>stack</sub> = ${rssVal.toFixed(4)})<br>
+      Monte Carlo &nbsp;10,000 samples &nbsp;=&nbsp; <span class="eq">${(mcYield*100).toFixed(2)}% in spec</span>, mean ${fmt(mcMean)}, σ ${mcStd.toFixed(4)}, DPMO ${dpmo.toLocaleString()}
+    `;
+
+    drawGauge({lo, hi, specMid, nominal, wcMin, wcMax, rssMin, rssMax, mcMin, mcMax});
+  }
+
+  function parseFloatOrNull(v){
+    if(v === '' || v === null || v === undefined) return null;
+    const n = Number(v);
+    return isNaN(n) ? null : n;
+  }
+
+  // ---------- drawing ----------
+  function drawChain(cs){
+    const W = 1000, H = 54;
+    if(cs.length === 0){
+      chainSvg.innerHTML = `<text x="0" y="30" fill="#5a6c8c" font-family="IBM Plex Mono" font-size="12">Chain preview appears once you add contributors</text>`;
+      return;
+    }
+    const total = cs.reduce((s,c)=> s + Math.max(Math.abs(c.nominal), 0.001), 0) || 1;
+    let x = 4;
+    const colors = ['#ff7a1a','#3d8bff','#ffd23f','#ff3b3b','#37e07a','#ff6bd6'];
+    let svg = '';
+    cs.forEach((c,i)=>{
+      const w = Math.max((Math.abs(c.nominal)/total) * (W-8), 40);
+      const col = colors[i % colors.length];
+      const arrow = c.sign > 0 ? '▸' : '◂';
+      svg += `<rect x="${x}" y="16" width="${w-4}" height="22" rx="5" fill="${col}" opacity="0.85"/>`;
+      svg += `<text x="${x+8}" y="31" font-family="IBM Plex Mono" font-size="11" fill="#160c07" font-weight="600">${arrow} ${escapeXml(truncate(c.name,16))}</text>`;
+      x += w;
+    });
+    chainSvg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    chainSvg.innerHTML = svg;
+  }
+
+  function truncate(s,n){ return s.length>n ? s.slice(0,n-1)+'…' : s; }
+  function escapeXml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function drawGauge(d){
+    const W = 560, H = 150;
+    if(!d || (!isFinite(d.lo) && !isFinite(d.hi))){
+      gaugeSvg.innerHTML = `<text x="12" y="80" fill="#5a6c8c" font-family="IBM Plex Mono" font-size="12">Set spec limits and contributors to see the fit</text>`;
+      return;
+    }
+    const vals = [d.lo, d.hi, d.nominal, d.wcMin, d.wcMax, d.rssMin, d.rssMax, d.mcMin, d.mcMax]
+      .filter(v => isFinite(v));
+    let vmin = Math.min(...vals), vmax = Math.max(...vals);
+    const pad = (vmax - vmin) * 0.18 || 1;
+    vmin -= pad; vmax += pad;
+    const px0 = 12, px1 = W-12;
+    const x = v => px0 + (v - vmin)/(vmax - vmin) * (px1 - px0);
+
+    let svg = '';
+    // spec zone
+    const zx0 = isFinite(d.lo) ? x(d.lo) : px0;
+    const zx1 = isFinite(d.hi) ? x(d.hi) : px1;
+    svg += `<rect x="${px0}" y="8" width="${px1-px0}" height="130" fill="#f2687a" opacity="0.06"/>`;
+    svg += `<rect x="${zx0}" y="8" width="${zx1-zx0}" height="130" fill="#4fd88a" opacity="0.08"/>`;
+
+    if(isFinite(d.lo)) svg += line(x(d.lo), 8, x(d.lo), 138, '#aebbd4', 1.5, '4,3') + label(x(d.lo), 148, fmt2(d.lo), '#aebbd4');
+    if(isFinite(d.hi)) svg += line(x(d.hi), 8, x(d.hi), 138, '#aebbd4', 1.5, '4,3') + label(x(d.hi), 148, fmt2(d.hi), '#aebbd4');
+    if(d.specMid !== null && isFinite(d.specMid)) svg += line(x(d.specMid), 8, x(d.specMid), 138, '#eaf0fa', 1, '2,2');
+
+    // nominal marker
+    svg += `<line x1="${x(d.nominal)}" y1="8" x2="${x(d.nominal)}" y2="138" stroke="#eaf0fa" stroke-width="1" stroke-dasharray="1,3"/>`;
+    svg += `<text x="${x(d.nominal)}" y="20" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#eaf0fa">nominal</text>`;
+
+    // three bars
+    const rowsY = [40, 75, 110];
+    const colors = ['#f2a93b', '#39d6c4', '#b49bff'];
+    const ranges = [[d.wcMin,d.wcMax], [d.rssMin,d.rssMax], [d.mcMin,d.mcMax]];
+    ranges.forEach((r,i)=>{
+      const rx0 = x(r[0]), rx1 = x(r[1]);
+      svg += `<rect x="${Math.min(rx0,rx1)}" y="${rowsY[i]}" width="${Math.max(Math.abs(rx1-rx0),2)}" height="14" rx="7" fill="${colors[i]}" opacity="0.9"/>`;
+    });
+
+    gaugeSvg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    gaugeSvg.innerHTML = svg;
+
+    function line(x1,y1,x2,y2,stroke,w,dash){
+      return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${stroke}" stroke-width="${w}" ${dash?`stroke-dasharray="${dash}"`:''}/>`;
+    }
+    function label(cx,y,text,fill){
+      return `<text x="${cx}" y="${y}" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="${fill}">${text}</text>`;
+    }
+    function fmt2(n){ return n.toFixed(3); }
+  }
+
+  // init
+  addRow();
+  compute();
+})();
+</script>
+</body>
+</html>
