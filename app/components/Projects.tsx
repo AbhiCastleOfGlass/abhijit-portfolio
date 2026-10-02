@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "@/lib/data";
@@ -8,6 +8,17 @@ import { X, Microscope, Zap, FileText } from "lucide-react";
 
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (selectedProject) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedProject]);
 
   // Helper to render placeholder icon for projects without images
   const getProjectIcon = (category: string) => {

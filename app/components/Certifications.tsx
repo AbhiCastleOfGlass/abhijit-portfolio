@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { certifications } from "@/lib/data";
@@ -8,6 +8,17 @@ import { Award, Sparkles, X } from "lucide-react";
 
 export default function Certifications() {
   const [selectedCert, setSelectedCert] = useState<{image: string, title: string} | null>(null);
+
+  useEffect(() => {
+    if (selectedCert) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedCert]);
 
   // Group certifications by category
   const coreCerts = certifications.filter(cert => cert.category === 'core');

@@ -17,10 +17,12 @@ export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   // Handle scroll events
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
@@ -126,10 +128,10 @@ export default function Navigation() {
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-md transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-md transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary w-9 h-9 flex items-center justify-center"
             aria-label="Toggle theme"
           >
-            {isDark ? <Sun size={18} /> : <Moon size={18} />}
+            {mounted ? (isDark ? <Sun size={18} /> : <Moon size={18} />) : <div className="w-[18px] h-[18px]" />}
           </button>
 
           {/* Mobile Menu Toggle */}

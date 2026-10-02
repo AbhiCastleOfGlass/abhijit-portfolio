@@ -28,7 +28,6 @@ export const viewport: Viewport = {
   ],
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
 };
 
 export const metadata: Metadata = {
@@ -40,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://yourusername.github.io/abhijit-portfolio",
+    url: "https://abhijit-portfolio.vercel.app", // Update this when you have a real domain
     title: "Abhijit Ghosh — Geometrical Assurance Engineer",
     description: "Portfolio of a GAE engineer specializing in tolerance stack-up analysis, GD&T, and automotive dimensional management.",
     siteName: "Abhijit Ghosh Portfolio",
