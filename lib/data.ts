@@ -56,19 +56,18 @@ export interface Stat {
 export const experience: Experience[] = [
   {
     id: 1,
-    title: "Engineer — Geometrical Assurance Engineering",
+    title: "Engineer (Stellantis)",
     logo: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://infosys.com&size=128",
-    company: "Infosys Limited (Stellantis Program)",
+    company: "Infosys Limited",
     location: "Mysuru, India",
     startDate: "May 2025",
     endDate: "Present",
     achievements: [
-      "Improved assembly yield from 54.34% to 99.90% per million units via 3D tolerance stack-up analysis using CETOL integrated with Siemens NX across BIW and interior assemblies",
-      "Ensured zero critical clashes across 15+ interface zones through Teamcenter Visualization Mockup reviews and virtual clearance analysis",
-      "Executed design modifications directly in Siemens NX, maintaining datum integrity and assembly-level dimensional accuracy (3-2-1 principle)",
-      "Reduced project management cycle time by ~40% through Power Automate workflows for dimensional convergence tracking",
-      "Achieved 90%+ first-pass design approval by applying GD&T callouts (ASME Y14.5) with proper datum strategy",
-      "Specialized in powertrain development, focusing on powertrain cooling systems and comprehensive powertrain integration within the vehicle architecture"
+      "Architected automated workflows utilizing Microsoft Power Automate and Microsoft Lists to streamline project management, minimizing operational clutter and significantly enhancing data transparency with the client.",
+      "Carried out tolerance stack-up analysis using CETOL and NX to identify variation risks and improve assembly accuracy.",
+      "Recommended critical design and tolerance optimization changes that increased assembly yield from 54.34% to 99.90% per million units.",
+      "Reviewed and confirmed clearances between key parts to avoid clashes and ensure smooth assembly.",
+      "Used GD&T standards in design reviews to maintain dimensional accuracy and reduce build issues."
     ]
   },
   {
@@ -80,35 +79,33 @@ export const experience: Experience[] = [
     startDate: "October 2024",
     endDate: "April 2025",
     achievements: [
-      "Underwent foundational systems engineering training at the Infosys Mysore campus, gaining exposure to corporate technical frameworks and processes",
-      "Executed 3D model modifications and added PMI annotations within Siemens NX, and performed parametric modeling in CATIA V5 for BIW and interior components",
-      "Validated assembly clearances using Teamcenter Visualization Mockup for clash-free design review sign-offs",
-      "Identified 3 critical stress concentration zones via FEA in Ansys Workbench before physical prototyping"
+      "Applied GD&T and 1D tolerance stack-up to verify alignment and fit of components during design stages.",
+      "Worked on 3D modeling and detailing in CATIA and Siemens NX to support design changes and manufacturing readiness.",
+      "Performed basic FEA in Ansys to check structural behavior and validate design assumptions."
     ]
   },
   {
     id: 3,
-    title: "Subject Matter Expert — Mechanical Engineering",
+    title: "Subject Matter Expert - Mechanical Engineering",
     logo: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://vaidikedu.com&size=128",
     company: "Vaidik Eduservices Pvt. Ltd",
     location: "Remote, India",
     startDate: "July 2023",
     endDate: "September 2024",
     achievements: [
-      "Recognized by leadership as a sincere, hardworking, and dedicated professional with excellent job knowledge",
-      "Supported 500+ students with structured problem-solving guides covering mechanical engineering basic subjects"
+      "Supported academic content development and problem-solving in core mechanical engineering subjects."
     ]
   },
   {
     id: 4,
-    title: "Project Engineer — Metallurgical & Materials Engineering",
+    title: "Intern",
     logo: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://iitj.ac.in&size=128",
-    company: "IIT Jodhpur",
+    company: "IIT Jodhpur - Dept of Metallurgical and Materials Engineering",
     location: "India",
     startDate: "March 2023",
     endDate: "June 2023",
     achievements: [
-      "Contributed to research on novel lithium-ion battery electrodes, performing material characterization and statistical data analysis"
+      "Worked on the project “Novel in-situ volume contractible metal halide negative electrodes for high-performance lithium-ion batteries”, focusing on material characterization and experimental analysis."
     ]
   }
 ];
