@@ -547,7 +547,7 @@ export default function CatiaReferencePage() {
             {/* HERO IMAGE */}
       <div style={{ position: "relative", width: "100%", height: "250px" }}>
         <Image 
-          src="https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?q=80"/assets/projects/catia-poster.jpeg"w=2000"/assets/projects/catia-poster.jpeg"auto=format"/assets/projects/catia-poster.jpeg"fit=crop" 
+          src="https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?q=80&w=2000&auto=format&fit=crop" 
           alt="CATIA V5 Learning Path Hero" 
           fill 
           style={{ objectFit: 'cover' }}
