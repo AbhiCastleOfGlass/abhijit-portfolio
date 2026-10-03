@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { contact } from "@/lib/data";
-import { Mail, Phone, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 const LinkedinIcon = ({ size = 24, className = "" }) => (
   <svg
@@ -48,26 +48,6 @@ export default function Contact() {
           </p>
 
           <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 md:gap-6">
-            <a
-              href={`mailto:${contact.email}`}
-              className="group flex items-center gap-3 px-6 py-4 bg-card hover:bg-muted border border-border rounded-xl font-medium transition-all duration-300 hover:shadow-md hover:border-primary/30 hover:-translate-y-1 w-full sm:w-auto justify-center"
-            >
-              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                <Mail size={18} />
-              </div>
-              <span className="text-foreground">{contact.email}</span>
-            </a>
-
-            <a
-              href={`tel:${contact.phone.replace(/\s+/g, '')}`}
-              className="group flex items-center gap-3 px-6 py-4 bg-card hover:bg-muted border border-border rounded-xl font-medium transition-all duration-300 hover:shadow-md hover:border-blue-500/30 hover:-translate-y-1 w-full sm:w-auto justify-center"
-            >
-              <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-500 group-hover:scale-110 transition-transform">
-                <Phone size={18} />
-              </div>
-              <span className="text-foreground">{contact.phone}</span>
-            </a>
-
             <a
               href={contact.linkedin}
               target="_blank"

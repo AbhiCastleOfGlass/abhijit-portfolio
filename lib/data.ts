@@ -309,8 +309,6 @@ export const stats: Stat[] = [
 ];
 
 export const contact = {
-  email: "abhijitahoshprem@gmail.com",
-  phone: "+91 82938 16687",
-  linkedin: "https://linkedin.com/in/abhijitmechie/",
+      linkedin: "https://linkedin.com/in/abhijitmechie/",
   location: "Mysuru, Karnataka, India"
 };
