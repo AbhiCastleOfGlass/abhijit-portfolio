@@ -243,14 +243,6 @@ export const certifications: Certification[] = [
   },
   {
     id: 5,
-    title: "Introduction to NX",
-    issuer: "Infosys",
-    date: "May 2025",
-    image: "/assets/certificates/linkedin_p10_0.jpeg",
-    category: "core"
-  },
-  {
-    id: 6,
     title: "Teamcenter 14.1x Visualization Mockup",
     issuer: "Tata Technologies",
     date: "Jan 2026",
@@ -258,7 +250,7 @@ export const certifications: Certification[] = [
     category: "core"
   },
   {
-    id: 7,
+    id: 6,
     title: "Product & Manufacturing Information (PMI)",
     issuer: "Tata Technologies",
     date: "Dec 2025",
@@ -266,7 +258,7 @@ export const certifications: Certification[] = [
     category: "core"
   },
   {
-    id: 8,
+    id: 7,
     title: "Fundamentals of Finite Element Analysis",
     issuer: "Tata Technologies",
     date: "Jan 2026",
@@ -274,23 +266,7 @@ export const certifications: Certification[] = [
     category: "core"
   },
   {
-    id: 9,
-    title: "Practical Applications of FEA",
-    issuer: "Infosys",
-    date: "Feb 2025",
-    image: "/assets/certificates/linkedin_p6_0.jpeg",
-    category: "core"
-  },
-  {
-    id: 10,
-    title: "Fundamentals of System Engineering",
-    issuer: "Infosys",
-    date: "Dec 2025",
-    image: "/assets/certificates/linkedin_p7_0.jpeg",
-    category: "core"
-  },
-  {
-    id: 11,
+    id: 8,
     title: "SOLIDWORKS Certification",
     issuer: "Academy of Skill Dev",
     date: "Mar 2021",
@@ -298,47 +274,7 @@ export const certifications: Certification[] = [
     category: "core"
   },
   {
-    id: 12,
-    title: "Ansys Workbench",
-    issuer: "Academy of Skill Dev",
-    date: "Apr 2021",
-    image: "/assets/certificates/linkedin_p6_0.jpeg",
-    category: "core"
-  },
-  {
-    id: 13,
-    title: "Google AI Tools",
-    issuer: "Infosys",
-    date: "Jun 2026",
-    image: "/assets/certificates/linkedin_p2_0.jpeg",
-    category: "ai"
-  },
-  {
-    id: 14,
-    title: "Introduction to Agentic AI",
-    issuer: "Infosys",
-    date: "Jul 2026",
-    image: "/assets/certificates/linkedin_p2_0.jpeg",
-    category: "ai"
-  },
-  {
-    id: 15,
-    title: "Prompt Engineering",
-    issuer: "Infosys",
-    date: "Dec 2024",
-    image: "/assets/certificates/linkedin_p10_0.jpeg",
-    category: "ai"
-  },
-  {
-    id: 16,
-    title: "Fundamentals of Microsoft Power Platform",
-    issuer: "Infosys",
-    date: "May 2026",
-    image: "/assets/certificates/linkedin_p2_0.jpeg",
-    category: "ai"
-  },
-  {
-    id: 17,
+    id: 9,
     title: "Design for Additive Manufacturing",
     issuer: "Infosys",
     date: "Jul 2025",
@@ -369,7 +305,7 @@ export const education: Education[] = [
 export const stats: Stat[] = [
   { label: "Assembly Yield", value: 99.9, suffix: "%" },
   { label: "Interface Zones", value: 15, suffix: "+" },
-  { label: "Certifications", value: 17 }
+  { label: "Certifications", value: 9 }
 ];
 
 export const contact = {
