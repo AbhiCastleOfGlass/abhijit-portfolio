@@ -96,7 +96,7 @@ export const experience: Experience[] = [
     endDate: "September 2024",
     achievements: [
       "Recognized by leadership as a sincere, hardworking, and dedicated professional with excellent job knowledge",
-      "Supported 500+ students with structured problem-solving guides covering GD&T, tolerance analysis, and manufacturing processes"
+      "Supported 500+ students with structured problem-solving guides covering mechanical engineering basic subjects"
     ]
   },
   {
