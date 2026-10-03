@@ -7,6 +7,7 @@ export interface Experience {
   location: string;
   startDate: string;
   endDate: string;
+  logo?: string;
   achievements: string[];
 }
 
@@ -56,6 +57,7 @@ export const experience: Experience[] = [
   {
     id: 1,
     title: "Engineer — Geometrical Assurance Engineering",
+    logo: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://infosys.com&size=128",
     company: "Infosys Limited (Stellantis Program)",
     location: "Mysuru, India",
     startDate: "May 2025",
@@ -65,19 +67,21 @@ export const experience: Experience[] = [
       "Ensured zero critical clashes across 15+ interface zones through Teamcenter Visualization Mockup reviews and virtual clearance analysis",
       "Executed design modifications directly in Siemens NX, maintaining datum integrity and assembly-level dimensional accuracy (3-2-1 principle)",
       "Reduced project management cycle time by ~40% through Power Automate workflows for dimensional convergence tracking",
-      "Achieved 90%+ first-pass design approval by applying GD&T callouts (ASME Y14.5) with proper datum strategy"
+      "Achieved 90%+ first-pass design approval by applying GD&T callouts (ASME Y14.5) with proper datum strategy",
+      "Specialized in powertrain development, focusing on powertrain cooling systems and comprehensive powertrain integration within the vehicle architecture"
     ]
   },
   {
     id: 2,
     title: "Systems Engineer Trainee",
+    logo: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://infosys.com&size=128",
     company: "Infosys Limited",
     location: "Mysuru, India",
     startDate: "October 2024",
     endDate: "April 2025",
     achievements: [
-      "Validated component fit for 10+ design change orders through 1D and 3D tolerance stack-up calculations with GD&T principles",
-      "Executed 3D model modifications in Siemens NX and added PMI annotations in CATIA V5 for BIW and interior components",
+      "Underwent foundational systems engineering training at the Infosys Mysore campus, gaining exposure to corporate technical frameworks and processes",
+      "Executed 3D model modifications and added PMI annotations within Siemens NX, and performed parametric modeling in CATIA V5 for BIW and interior components",
       "Validated assembly clearances using Teamcenter Visualization Mockup for clash-free design review sign-offs",
       "Identified 3 critical stress concentration zones via FEA in Ansys Workbench before physical prototyping"
     ]
@@ -85,17 +89,20 @@ export const experience: Experience[] = [
   {
     id: 3,
     title: "Subject Matter Expert — Mechanical Engineering",
+    logo: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://vaidikedu.com&size=128",
     company: "Vaidik Eduservices Pvt. Ltd",
     location: "Remote, India",
     startDate: "July 2023",
     endDate: "September 2024",
     achievements: [
+      "Recognized by leadership as a sincere, hardworking, and dedicated professional with excellent job knowledge",
       "Supported 500+ students with structured problem-solving guides covering GD&T, tolerance analysis, and manufacturing processes"
     ]
   },
   {
     id: 4,
-    title: "Research Intern — Metallurgical & Materials Engineering",
+    title: "Project Engineer — Metallurgical & Materials Engineering",
+    logo: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://iitj.ac.in&size=128",
     company: "IIT Jodhpur",
     location: "India",
     startDate: "March 2023",
@@ -186,35 +193,21 @@ export const skills: SkillCategory[] = [
 export const projects: Project[] = [
   {
     id: 1,
-    title: "StackUp Analysis Reference Kit",
+    title: "1D Stack Up calculation tool",
     description: "Curated collection of GD&T cheat sheets, tolerance analysis guides, DFM references for CNC, sheet metal, and injection molding — built as a one-stop engineering resource for dimensional management.",
-    image: "/assets/projects/gdt-cover.png",
+    image: "https://images.unsplash.com/photo-1581092335397-9583eb92d232?q=80&w=2000&auto=format&fit=crop",
     tags: ["GD&T", "ASME Y14.5", "Tolerance Analysis", "DFM Guides"],
     category: "GD&T",
-    link: "/tolerance-stackup-analysis.html"
+    link: "/projects/stackup-analysis"
   },
   {
     id: 2,
-    title: "Li-ion Battery Electrode Research",
-    description: "Published research at IIT Jodhpur on novel in-situ volume contractible metal halide negative electrodes for lithium-ion batteries — material characterization and statistical analysis of electrode performance.",
-    tags: ["Research Publication", "IIT Jodhpur", "Materials Science"],
-    category: "Research"
-  },
-  {
-    id: 3,
-    title: "CATIA V5 Tools Reference",
+    title: "Catia Learning Path",
     description: "Comprehensive visual reference covering all 12 CATIA V5 workbenches — Sketcher, Part Design, Assembly, Drafting, GSD, Wireframe, Sheet Metal, Weld, Mold, DMU Navigator, Analysis, and Electrical Design.",
-    image: "/assets/projects/catia-poster.jpeg",
+    image: "https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?q=80&w=2000&auto=format&fit=crop",
     tags: ["CATIA V5", "CAD Reference", "All Workbenches"],
     category: "CAD",
-    link: "https://claude.ai/public/artifacts/b0859b0a-51d0-40b7-8c73-f092f2285db8"
-  },
-  {
-    id: 4,
-    title: "Automated Dimensional Convergence Tracker",
-    description: "Built custom workflows using Microsoft Power Automate and Microsoft Lists to streamline dimensional convergence tracking on the Stellantis program — reduced cycle time by ~40%.",
-    tags: ["Power Automate", "Process Automation", "40% Time Saving"],
-    category: "Automation"
+    link: "/projects/catia-v5"
   }
 ];
 

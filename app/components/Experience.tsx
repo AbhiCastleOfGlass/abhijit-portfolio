@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { experience } from "@/lib/data";
+import Image from "next/image";
 
 export default function Experience() {
   return (
@@ -54,15 +55,26 @@ export default function Experience() {
               </div>
 
               <div className="bg-card border border-border p-6 md:p-8 rounded-xl transition-all duration-300 hover:shadow-lg hover:border-primary/50 group-hover:translate-x-1">
-                <h3 className="font-display text-xl md:text-2xl font-bold mb-1">
-                  {exp.title}
-                </h3>
-                <div className="text-primary font-semibold text-sm md:text-base mb-1">
-                  {exp.company}
-                </div>
-                <div className="text-muted-foreground text-sm mb-6 flex items-center gap-1.5">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                  {exp.location}
+                <div className="flex justify-between items-start mb-4">
+                  <div>
+                    <h3 className="font-display text-xl md:text-2xl font-bold mb-1">
+                      {exp.title}
+                    </h3>
+                    <div className="text-primary font-semibold text-sm md:text-base mb-1">
+                      {exp.company}
+                    </div>
+                    <div className="text-muted-foreground text-sm flex items-center gap-1.5">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                      {exp.location}
+                    </div>
+                  </div>
+                  {exp.logo && (
+                    <div className="hidden sm:block shrink-0 bg-white rounded-lg p-1.5 border border-border shadow-sm">
+                      <div className="relative w-12 h-12 flex items-center justify-center overflow-hidden">
+                        <Image src={exp.logo} alt={exp.company} fill className="object-contain" />
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <ul className="space-y-3">
