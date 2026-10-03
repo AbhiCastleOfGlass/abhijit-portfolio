@@ -94,7 +94,7 @@ export default function Navigation() {
           <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_0_12px_rgba(234,88,12,0.4)] group-hover:shadow-[0_0_16px_rgba(234,88,12,0.6)] transition-all">
             <span className="text-white text-sm">★</span>
           </div>
-          <span className="font-display font-bold text-xl tracking-wider uppercase hidden sm:block">A.Ghosh</span>
+          <span className="font-display font-bold text-xl tracking-wider uppercase hidden sm:block">Abhijit Ghosh</span>
         </button>
 
         {/* Desktop Nav */}
