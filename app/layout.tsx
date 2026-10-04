@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Space_Grotesk, JetBrains_Mono, Rajdhani } from "next/font/google";
+import { Inter, JetBrains_Mono, Rajdhani } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({

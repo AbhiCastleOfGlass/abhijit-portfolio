@@ -41,10 +41,10 @@ export default function Contact() {
             Contact
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-balance mb-8">
-            Let's power up together
+            Let&apos;s power up together
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
-            Looking for GAE roles, dimensional management projects, or automotive engineering challenges. Let's connect!
+            Looking for GAE roles, dimensional management projects, or automotive engineering challenges. Let&apos;s connect!
           </p>
 
           <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 md:gap-6">

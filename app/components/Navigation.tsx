@@ -22,6 +22,7 @@ export default function Navigation() {
 
   // Handle scroll events
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -52,6 +53,7 @@ export default function Navigation() {
     // Check system preference
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
       document.documentElement.classList.add('dark');
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsDark(true);
     } else {
       document.documentElement.classList.remove('dark');

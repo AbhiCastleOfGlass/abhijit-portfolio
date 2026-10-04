@@ -426,7 +426,6 @@ export default function CatiaReferencePage() {
   const [selectedAns, setSelectedAns] = useState<number | null>(null);
   const [showResult, setShowResult] = useState<boolean>(false);
   const [achievements, setAchievements] = useState<string[]>([]);
-  const [shortcutTrainer, setShortcutTrainer] = useState<boolean>(false);
   const [trainerQ, setTrainerQ] = useState<number>(0);
   const [trainerInput, setTrainerInput] = useState<string>("");
   const [trainerFeedback, setTrainerFeedback] = useState<"correct" | "wrong" | null>(null);
