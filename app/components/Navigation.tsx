@@ -72,8 +72,10 @@ export default function Navigation() {
   };
 
   const handleNavClick = (href: string) => {
-    scrollToSection(href);
     setMobileMenuOpen(false);
+    setTimeout(() => {
+      scrollToSection(href);
+    }, 300);
   };
 
   const checkPowerLevel = () => {
@@ -163,7 +165,7 @@ export default function Navigation() {
                 <button
                   key={link.name}
                   onClick={() => handleNavClick(link.href)}
-                  className={`px-4 py-3 text-left rounded-md font-medium ${
+                  className={`px-4 py-3 text-left w-full rounded-md font-medium ${
                     activeSection === link.href
                       ? "bg-primary/10 text-primary"
                       : "text-muted-foreground hover:bg-muted hover:text-foreground"
