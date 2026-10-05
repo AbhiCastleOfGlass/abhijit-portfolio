@@ -48,7 +48,7 @@ export default function About() {
             About Me
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-balance max-w-3xl">
-            Precision is not a goal — it's a discipline
+            Precision is not a goal — it&apos;s a discipline
           </h2>
         </motion.div>
 
@@ -61,7 +61,7 @@ export default function About() {
             className="prose prose-lg dark:prose-invert text-muted-foreground"
           >
             <p className="mb-6">
-              I'm a Geometrical Assurance Engineer at Infosys, working on Stellantis automotive programs. My mission: ensuring every component — from BIW structures to interior trim — achieves its dimensional targets for perfect fit, function, and aesthetics.
+              I&apos;m a Geometrical Assurance Engineer at Infosys, working on Stellantis automotive programs. My mission: ensuring every component — from BIW structures to interior trim — achieves its dimensional targets for perfect fit, function, and aesthetics.
             </p>
             <p className="mb-6">
               Daily, I work in <strong className="text-foreground">Siemens NX</strong> for design modifications, run 3D tolerance stack-ups through <strong className="text-foreground">CETOL</strong>, and validate assemblies in <strong className="text-foreground">Teamcenter Visualization Mockup</strong>. I bridge the gap between geometric intent and manufacturing reality.

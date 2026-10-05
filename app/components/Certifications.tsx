@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { certifications } from "@/lib/data";
+import { certifications, type Certification } from "@/lib/data";
 import { Award, Sparkles, X } from "lucide-react";
 
 export default function Certifications() {
@@ -139,7 +139,7 @@ export default function Certifications() {
 }
 
 // Sub-component for individual certificate cards
-function CertCard({ cert, index, isAi = false, onClick }: { cert: any, index: number, isAi?: boolean, onClick: () => void }) {
+function CertCard({ cert, index, isAi = false, onClick }: { cert: Certification, index: number, isAi?: boolean, onClick: () => void }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}

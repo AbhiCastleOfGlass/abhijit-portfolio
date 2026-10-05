@@ -22,36 +22,51 @@ export default function Navigation() {
 
   // Handle scroll events
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
+    let ticking = false;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 20);
 
-      // Determine active section
-      const sections = links.map(link => document.getElementById(link.href));
-      const scrollPosition = window.scrollY + 100;
+          // Determine active section
+          const scrollPosition = window.scrollY + 100;
+          let found = false;
 
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i];
-        if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(links[i].href);
-          return;
-        }
-      }
+          for (let i = links.length - 1; i >= 0; i--) {
+            const section = document.getElementById(links[i].href);
+            if (section && section.offsetTop <= scrollPosition) {
+              setActiveSection(links[i].href);
+              found = true;
+              break;
+            }
+          }
 
-      if (window.scrollY < 100) {
-        setActiveSection("");
+          if (!found && window.scrollY < 100) {
+            setActiveSection("");
+          }
+
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Initialize theme
   useEffect(() => {
-    // Check system preference
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // Check saved preference or system preference
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
       document.documentElement.classList.add('dark');
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsDark(true);
     } else {
       document.documentElement.classList.remove('dark');
@@ -62,16 +77,20 @@ export default function Navigation() {
   const toggleTheme = () => {
     if (isDark) {
       document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
       setIsDark(false);
     } else {
       document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
       setIsDark(true);
     }
   };
 
   const handleNavClick = (href: string) => {
-    scrollToSection(href);
     setMobileMenuOpen(false);
+    setTimeout(() => {
+      scrollToSection(href);
+    }, 150);
   };
 
   const checkPowerLevel = () => {
@@ -149,18 +168,19 @@ export default function Navigation() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden bg-card border-b border-border shadow-md overflow-hidden"
+            key="mobile-nav-menu"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden absolute w-full bg-card border-b border-border shadow-lg overflow-y-auto max-h-[85vh] left-0 top-full origin-top"
           >
             <nav className="flex flex-col p-4 gap-2">
               {links.map((link) => (
                 <button
                   key={link.name}
                   onClick={() => handleNavClick(link.href)}
-                  className={`px-4 py-3 text-left rounded-md font-medium ${
+                  className={`px-4 py-3 text-left w-full rounded-md font-medium ${
                     activeSection === link.href
                       ? "bg-primary/10 text-primary"
                       : "text-muted-foreground hover:bg-muted hover:text-foreground"

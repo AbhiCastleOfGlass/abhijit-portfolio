@@ -9,7 +9,7 @@ export function scrollToSection(sectionId: string): void {
   if (element) {
     const navHeight = 80;
     const elementPosition = element.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+    const offsetPosition = elementPosition + window.scrollY - navHeight;
     window.scrollTo({
       top: offsetPosition,
       behavior: "smooth"
