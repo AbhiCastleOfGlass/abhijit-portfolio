@@ -24,34 +24,47 @@ export default function Navigation() {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
+    let ticking = false;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 20);
 
-      // Determine active section
-      const sections = links.map(link => document.getElementById(link.href));
-      const scrollPosition = window.scrollY + 100;
+          // Determine active section
+          const scrollPosition = window.scrollY + 100;
+          let found = false;
 
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i];
-        if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(links[i].href);
-          return;
-        }
-      }
+          for (let i = links.length - 1; i >= 0; i--) {
+            const section = document.getElementById(links[i].href);
+            if (section && section.offsetTop <= scrollPosition) {
+              setActiveSection(links[i].href);
+              found = true;
+              break;
+            }
+          }
 
-      if (window.scrollY < 100) {
-        setActiveSection("");
+          if (!found && window.scrollY < 100) {
+            setActiveSection("");
+          }
+
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Initialize theme
   useEffect(() => {
-    // Check system preference
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // Check saved preference or system preference
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
       document.documentElement.classList.add('dark');
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsDark(true);
@@ -64,9 +77,11 @@ export default function Navigation() {
   const toggleTheme = () => {
     if (isDark) {
       document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
       setIsDark(false);
     } else {
       document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
       setIsDark(true);
     }
   };
@@ -75,7 +90,7 @@ export default function Navigation() {
     setMobileMenuOpen(false);
     setTimeout(() => {
       scrollToSection(href);
-    }, 300);
+    }, 150);
   };
 
   const checkPowerLevel = () => {

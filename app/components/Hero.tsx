@@ -1,19 +1,13 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useRef } from "react";
 import { motion } from "framer-motion";
 import { Download, Mail } from "lucide-react";
 import { scrollToSection } from "@/lib/utils";
 import { stats } from "@/lib/data";
 
 export default function Hero() {
-  const [mounted, setMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true);
-  }, []);
 
   return (
     <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden" id="hero">
@@ -97,7 +91,7 @@ export default function Hero() {
               <div key={i} className="flex flex-col">
                 <div className="flex items-baseline gap-1">
                   <span className="font-display text-4xl md:text-5xl font-bold text-primary tabular-nums">
-                    {mounted ? stat.value : '0'}
+                    {stat.value}
                   </span>
                   {stat.suffix && (
                     <span className="font-display text-2xl font-bold text-primary">
