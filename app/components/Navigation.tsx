@@ -155,7 +155,7 @@ export default function Navigation() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-card border-b border-border shadow-md overflow-hidden"
+            className="md:hidden absolute w-full bg-card border-b border-border shadow-lg overflow-y-auto max-h-[85vh] left-0 top-full origin-top"
           >
             <nav className="flex flex-col p-4 gap-2">
               {links.map((link) => (
