@@ -31,17 +31,17 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Abhijit Ghosh | Geometrical Assurance Engineer",
-  description: "Portfolio of Abhijit Ghosh – Geometrical Assurance Engineer specializing in GD&T, 3D tolerance analysis, and automotive product development.",
-  keywords: ["Abhijit Ghosh", "Geometrical Assurance Engineer", "GAE", "GD&T", "Tolerance Analysis", "Siemens NX", "CETOL", "Automotive Engineer"],
+  title: "Abhijit Ghosh | Senior Systems Engineer — GAE & Dimensional Management",
+  description: "Portfolio of Abhijit Ghosh – Senior Systems Engineer at Infosys (Stellantis Program), specializing in GD&T, 3D tolerance stack-up analysis (CETOL), and automotive dimensional management.",
+  keywords: ["Abhijit Ghosh", "Senior Systems Engineer", "Geometrical Assurance Engineer", "GAE", "GD&T", "Tolerance Analysis", "Siemens NX", "CETOL", "Automotive Engineer", "Dimensional Management", "VSA"],
   authors: [{ name: "Abhijit Ghosh" }],
   creator: "Abhijit Ghosh",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://abhijit-portfolio.vercel.app", // Update this when you have a real domain
-    title: "Abhijit Ghosh — Geometrical Assurance Engineer",
-    description: "Portfolio of a GAE engineer specializing in tolerance stack-up analysis, GD&T, and automotive dimensional management.",
+    title: "Abhijit Ghosh — Senior Systems Engineer | GAE & Dimensional Management",
+    description: "Portfolio of a Senior Systems Engineer specializing in tolerance stack-up analysis (CETOL), GD&T, Siemens NX, and automotive dimensional management.",
     siteName: "Abhijit Ghosh Portfolio",
   },
 };

@@ -56,22 +56,34 @@ export interface Stat {
 export const experience: Experience[] = [
   {
     id: 1,
-    title: "Engineer (Stellantis)",
+    title: "Senior Systems Engineer (Stellantis)",
+    logo: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://infosys.com&size=128",
+    company: "Infosys Limited",
+    location: "Mysuru, India",
+    startDate: "Oct 2026",
+    endDate: "Present",
+    achievements: [
+      "Promoted to Senior Systems Engineer in recognition of consistently high performance and project impact.",
+      "Architected automated workflows utilizing Microsoft Power Automate and Microsoft Lists to streamline project management, minimizing operational clutter and significantly enhancing data transparency with the client.",
+      "Recommended critical design and tolerance optimization changes that increased assembly yield from 54.34% to 99.90% per million units."
+    ]
+  },
+  {
+    id: 2,
+    title: "Systems Engineer (Stellantis)",
     logo: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://infosys.com&size=128",
     company: "Infosys Limited",
     location: "Mysuru, India",
     startDate: "May 2025",
-    endDate: "Present",
+    endDate: "Sep 2026",
     achievements: [
-      "Architected automated workflows utilizing Microsoft Power Automate and Microsoft Lists to streamline project management, minimizing operational clutter and significantly enhancing data transparency with the client.",
       "Carried out tolerance stack-up analysis using CETOL and NX to identify variation risks and improve assembly accuracy.",
-      "Recommended critical design and tolerance optimization changes that increased assembly yield from 54.34% to 99.90% per million units.",
       "Reviewed and confirmed clearances between key parts to avoid clashes and ensure smooth assembly.",
       "Used GD&T standards in design reviews to maintain dimensional accuracy and reduce build issues."
     ]
   },
   {
-    id: 2,
+    id: 3,
     title: "Systems Engineer Trainee",
     logo: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://infosys.com&size=128",
     company: "Infosys Limited",
@@ -85,7 +97,7 @@ export const experience: Experience[] = [
     ]
   },
   {
-    id: 3,
+    id: 4,
     title: "Subject Matter Expert - Mechanical Engineering",
     logo: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://vaidikedu.com&size=128",
     company: "Vaidik Eduservices Pvt. Ltd",
@@ -97,7 +109,7 @@ export const experience: Experience[] = [
     ]
   },
   {
-    id: 4,
+    id: 5,
     title: "Intern",
     logo: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://iitj.ac.in&size=128",
     company: "IIT Jodhpur - Dept of Metallurgical and Materials Engineering",
