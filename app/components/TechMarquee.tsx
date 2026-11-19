@@ -16,7 +16,7 @@ const techItems: TechItem[] = [
   { name: "CATIA V5", category: "Modeling", icon: <Cpu size={16} className="text-blue-400" /> },
   { name: "Microsoft Power Automate", category: "Automation", icon: <Workflow size={16} className="text-yellow-500" /> },
   { name: "Ansys Workbench", category: "FEA Simulation", icon: <Zap size={16} className="text-orange-500" /> },
-  { name: "BIW Structures", category: "Automotive", icon: <Car size={16} className="text-green-500" /> },
+  { name: "Powertrain Subsystems", category: "Automotive", icon: <Car size={16} className="text-green-500" /> },
   { name: "3-2-1 Datum Strategy", category: "Dimensional", icon: <TargetIcon size={16} className="text-red-500" /> },
   { name: "DFMEA-MSR", category: "Quality", icon: <ShieldCheck size={16} className="text-indigo-500" /> },
   { name: "Lean Six Sigma AI", category: "Certification", icon: <Award size={16} className="text-amber-500" /> },

@@ -1,6 +1,7 @@
 import Navigation from "./components/Navigation";
 import Hero from "./components/Hero";
 import TechMarquee from "./components/TechMarquee";
+import VehicleInspector from "./components/VehicleInspector";
 import About from "./components/About";
 import Experience from "./components/Experience";
 import SkillsMatrix from "./components/SkillsMatrix";
@@ -17,6 +18,7 @@ export default function Home() {
       <main>
         <Hero />
         <TechMarquee />
+        <VehicleInspector />
         <About />
         <Experience />
         <SkillsMatrix />

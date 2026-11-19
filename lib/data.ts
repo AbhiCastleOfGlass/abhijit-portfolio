@@ -63,9 +63,9 @@ export const experience: Experience[] = [
     startDate: "Oct 2026",
     endDate: "Present",
     achievements: [
-      "Promoted to Senior Systems Engineer in recognition of consistently high performance and project impact.",
-      "Architected automated workflows utilizing Microsoft Power Automate and Microsoft Lists to streamline project management, minimizing operational clutter and significantly enhancing data transparency with the client.",
-      "Recommended critical design and tolerance optimization changes that increased assembly yield from 54.34% to 99.90% per million units."
+      "Increased powertrain subsystem assembly yield from 54.34% to 99.90% per million units by executing 3D variation simulation in CETOL and reallocating critical GD&T tolerances.",
+      "Built automated project tracking workflows using Microsoft Power Automate and Lists, cutting administrative reporting overhead and enabling real-time engineering change tracking with Stellantis stakeholders.",
+      "Promoted to Senior Systems Engineer in recognition of consistently high performance and engineering impact on the Stellantis program."
     ]
   },
   {
@@ -77,9 +77,9 @@ export const experience: Experience[] = [
     startDate: "May 2025",
     endDate: "Sep 2026",
     achievements: [
-      "Carried out tolerance stack-up analysis using CETOL and NX to identify variation risks and improve assembly accuracy.",
-      "Reviewed and confirmed clearances between key parts to avoid clashes and ensure smooth assembly.",
-      "Used GD&T standards in design reviews to maintain dimensional accuracy and reduce build issues."
+      "Conducted 3D tolerance stack-up analysis in CETOL and Siemens NX across engine cooling circuits and air intake packaging, mitigating high-risk assembly variation before tooling freeze.",
+      "Performed dynamic clash and gap/flush analyses in Teamcenter Vis Mockup, resolving clearance violations across critical powertrain packaging interfaces.",
+      "Applied ASME Y14.5 GD&T standards and 3-2-1 datum strategies in cross-functional design reviews to ensure dimensional repeatability and prevent build defects."
     ]
   },
   {
@@ -91,9 +91,9 @@ export const experience: Experience[] = [
     startDate: "October 2024",
     endDate: "April 2025",
     achievements: [
-      "Applied GD&T and 1D tolerance stack-up to verify alignment and fit of components during design stages.",
-      "Worked on 3D modeling and detailing in CATIA and Siemens NX to support design changes and manufacturing readiness.",
-      "Performed basic FEA in Ansys to check structural behavior and validate design assumptions."
+      "Evaluated component fit and alignment across early-stage assemblies using ASME Y14.5 GD&T and 1D tolerance stack-up calculations.",
+      "Developed 3D models and manufacturing detail drawings in Siemens NX and CATIA V5 to support design modifications and manufacturing readiness.",
+      "Performed structural FEA in Ansys to verify stress distributions and validate design assumptions."
     ]
   },
   {
@@ -105,7 +105,7 @@ export const experience: Experience[] = [
     startDate: "July 2023",
     endDate: "September 2024",
     achievements: [
-      "Supported academic content development and problem-solving in core mechanical engineering subjects."
+      "Delivered technical problem-solving and rigorous engineering solutions across core mechanical engineering domains (thermodynamics, mechanics of materials, and machine design)."
     ]
   },
   {
@@ -117,7 +117,7 @@ export const experience: Experience[] = [
     startDate: "March 2023",
     endDate: "June 2023",
     achievements: [
-      "Worked on the project “Novel in-situ volume contractible metal halide negative electrodes for high-performance lithium-ion batteries”, focusing on material characterization and experimental analysis."
+      "Investigated novel in-situ volume contractible metal halide negative electrodes for high-performance lithium-ion batteries, executing material characterization and experimental data analysis."
     ]
   }
 ];
@@ -173,15 +173,15 @@ export const skills: SkillCategory[] = [
     color: "yellow"
   },
   {
-    category: "Domain Knowledge",
+    category: "Subsystem Domain",
     icon: "car",
     tags: [
-      "BIW",
-      "Interior & Exterior",
-      "Sheet Metal Manufacturing",
-      "Plastic Components",
-      "Additive Manufacturing",
-      "System Engineering"
+      "Engine Packaging",
+      "Cooling Circuits",
+      "Air Intake Packaging",
+      "Exhaust Systems",
+      "Castings & Sheet Metal",
+      "Additive Manufacturing"
     ],
     color: "purple"
   },

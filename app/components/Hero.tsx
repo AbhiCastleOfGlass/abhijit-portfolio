@@ -95,11 +95,11 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.4 }}
           >
             <button
-              onClick={() => scrollToSection('contact')}
+              onClick={() => scrollToSection('vehicle-inspector')}
               className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-primary hover:bg-primary-dark text-white rounded-xl font-semibold transition-all shadow-[0_4px_20px_rgba(234,88,12,0.35)] hover:shadow-[0_6px_25px_rgba(234,88,12,0.5)] hover:-translate-y-0.5 cursor-pointer"
             >
-              <Mail size={18} />
-              Get in Touch
+              <Sparkles size={18} />
+              Inspect 3D Vehicle
               <ArrowRight size={16} />
             </button>
             <a
@@ -110,6 +110,13 @@ export default function Hero() {
               <Download size={18} />
               Download Resume (PDF)
             </a>
+            <button
+              onClick={() => scrollToSection('contact')}
+              className="inline-flex items-center gap-2 px-5 py-3.5 bg-card hover:bg-muted border border-border text-muted-foreground hover:text-foreground rounded-xl font-semibold transition-all cursor-pointer"
+            >
+              <Mail size={16} />
+              Contact
+            </button>
           </motion.div>
 
           <motion.div

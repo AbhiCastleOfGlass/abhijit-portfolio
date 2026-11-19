@@ -6,6 +6,7 @@ import { Menu, X, Sun, Moon, Zap } from "lucide-react";
 import { scrollToSection } from "@/lib/utils";
 
 const links = [
+  { name: "3D Vehicle", href: "vehicle-inspector" },
   { name: "About", href: "about" },
   { name: "Experience", href: "experience" },
   { name: "Skills", href: "skills" },

@@ -21,8 +21,8 @@
 \addtolength{\oddsidemargin}{-0.5in}
 \addtolength{\evensidemargin}{-0.5in}
 \addtolength{\textwidth}{1in}
-\addtolength{\topmargin}{-.5in}
-\addtolength{\textheight}{1.0in}
+\addtolength{\topmargin}{-.85in}
+\addtolength{\textheight}{1.75in}
 
 \urlstyle{same}
 
@@ -32,11 +32,14 @@
 
 % Sections formatting
 \titleformat{\section}{
-  \vspace{-5pt}\scshape\raggedright\large
+  \vspace{-7pt}\scshape\raggedright\large
 }{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
 
-% Ensure that generate pdf is machine readable/ATS parsable
-% \pdfgentounicode=1
+% Ensure that generated pdf is machine readable/ATS parsable
+\ifdefined\pdfgentounicode
+  \input{glyphtounicode}
+  \pdfgentounicode=1
+\fi
 
 %-------------------------
 % Custom commands
@@ -47,35 +50,35 @@
 }
 
 \newcommand{\resumeSubheading}[4]{
-  \vspace{-2pt}\item
+  \vspace{-1pt}\item
     \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
       \textbf{#1} & #2 \\
       \textit{\small#3} & \textit{\small #4} \\
-    \end{tabular*}\vspace{-7pt}
+    \end{tabular*}\vspace{-5pt}
 }
 
 \newcommand{\resumeSubSubheading}[2]{
     \item
     \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
       \textit{\small#1} & \textit{\small #2} \\
-    \end{tabular*}\vspace{-7pt}
+    \end{tabular*}\vspace{-5pt}
 }
 
 \newcommand{\resumeProjectHeading}[2]{
     \item
     \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
       \small#1 & #2 \\
-    \end{tabular*}\vspace{-7pt}
+    \end{tabular*}\vspace{-5pt}
 }
 
-\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-3pt}}
 
 \renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
 
 \newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
 \newcommand{\resumeItemListStart}{\begin{itemize}}
-\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-3pt}}
 
 %-------------------------------------------
 %%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -85,15 +88,16 @@
 
 %----------HEADING----------
 \begin{center}
-    \textbf{\Huge \scshape Abhijit Ghosh} \\ \vspace{5pt}
-    \small Mysuru, Karnataka, India - 570016 $|$ (+91) 82938 16687 $|$ \href{mailto:abhijitahoshprem@gmail.com}{\underline{abhijitahoshprem@gmail.com}} $|$
+    \textbf{\Huge \scshape Abhijit Ghosh} \\ \vspace{3pt}
+    \small Mysuru, Karnataka, India - 570016 $|$ (+91) 82938 16687 $|$ \href{mailto:abhijitghoshprem@gmail.com}{\underline{abhijitghoshprem@gmail.com}} $|$
     \href{https://linkedin.com/in/abhijitmechie/}{\underline{linkedin.com/in/abhijitmechie/}} $|$
     \href{https://abhijittorq.vercel.app/}{\underline{Portfolio}}
 \end{center}
+\vspace{-12pt}
 
 %-----------OBJECTIVE-----------
 \section{Objective}
-\small{To contribute to innovative mechanical design and development by applying expertise in design integration, manufacturing, and quality assurance. Seeking to utilize skills in CETOL, Siemens Teamcenter, Visual Mockup, and NX to enhance product precision, optimize processes, and support cross-functional engineering initiatives.}
+\small{Geometrical Assurance \& Mechanical Design Engineer with expertise in 3D tolerance stack-up analysis (CETOL), CAD modeling (Siemens NX), and digital mockup validation (Teamcenter Vis Mockup). Applying ASME Y14.5 GD\&T and 3-2-1 datum strategies across engine subsystems to eliminate packaging clashes and optimize assembly yield.}
 \vspace{-5pt}
 
 %-----------EXPERIENCE-----------
@@ -103,41 +107,41 @@
       {Senior Systems Engineer (Stellantis Program)}{October 2026 -- Present}
       {Infosys Limited}{Mysuru, India}
       \resumeItemListStart
-        \resumeItem{Promoted to Senior Systems Engineer in recognition of consistently high performance and project impact.}
-        \resumeItem{Architected automated workflows utilizing Microsoft Power Automate and Microsoft Lists to streamline project management, minimizing operational clutter and significantly enhancing data transparency with the client.}
-        \resumeItem{Recommended critical design and tolerance optimization changes that increased assembly yield from 54.34\% to 99.90\% per million units.}
+        \resumeItem{Increased powertrain subsystem assembly yield from 54.34\% to 99.90\% per million units by executing 3D variation simulation in CETOL and reallocating critical GD\&T tolerances.}
+        \resumeItem{Built automated project tracking workflows using Microsoft Power Automate and Lists, cutting administrative reporting overhead and enabling real-time engineering change tracking with Stellantis stakeholders.}
+        \resumeItem{Promoted to Senior Systems Engineer in recognition of consistently high performance and engineering impact on the Stellantis program.}
       \resumeItemListEnd
 
     \resumeSubheading
       {Systems Engineer (Stellantis Program)}{May 2025 -- September 2026}
       {Infosys Limited}{Mysuru, India}
       \resumeItemListStart
-        \resumeItem{Carried out tolerance stack-up analysis using CETOL and NX to identify variation risks and improve assembly accuracy.}
-        \resumeItem{Reviewed and confirmed clearances between key parts to avoid clashes and ensure smooth assembly.}
-        \resumeItem{Used GD\&T standards in design reviews to maintain dimensional accuracy and reduce build issues.}
+        \resumeItem{Conducted 3D tolerance stack-up analysis in CETOL and Siemens NX across engine cooling circuits and air intake packaging, mitigating high-risk assembly variation before tooling freeze.}
+        \resumeItem{Performed dynamic clash and gap/flush analyses in Teamcenter Vis Mockup, resolving clearance violations across critical powertrain packaging interfaces.}
+        \resumeItem{Applied ASME Y14.5 GD\&T standards and 3-2-1 datum strategies in cross-functional design reviews to ensure dimensional repeatability and prevent build defects.}
       \resumeItemListEnd
 
     \resumeSubheading
       {Systems Engineer Trainee}{October 2024 -- April 2025}
       {Infosys Limited}{Mysuru, India}
       \resumeItemListStart
-        \resumeItem{Applied GD\&T and 1D tolerance stack-up to verify alignment and fit of components during design stages.}
-        \resumeItem{Worked on 3D modeling and detailing in CATIA and Siemens NX to support design changes and manufacturing readiness.}
-        \resumeItem{Performed basic FEA in Ansys to check structural behavior and validate design assumptions.}
+        \resumeItem{Evaluated component fit and alignment across early-stage assemblies using ASME Y14.5 GD\&T and 1D tolerance stack-up calculations.}
+        \resumeItem{Developed 3D models and manufacturing detail drawings in Siemens NX and CATIA V5 to support design modifications and manufacturing readiness.}
+        \resumeItem{Performed structural FEA in Ansys to verify stress distributions and validate design assumptions.}
       \resumeItemListEnd
 
     \resumeSubheading
       {Subject Matter Expert - Mechanical Engineering}{July 2023 -- September 2024}
       {Vaidik Eduservices Pvt. Ltd}{Remote, India}
       \resumeItemListStart
-        \resumeItem{Supported academic content development and problem-solving in core mechanical engineering subjects.}
+        \resumeItem{Delivered technical problem-solving and rigorous engineering solutions across core mechanical engineering domains (thermodynamics, mechanics of materials, and machine design).}
       \resumeItemListEnd
 
     \resumeSubheading
       {Intern}{March 2023 -- June 2023}
       {IIT Jodhpur - Dept of Metallurgical and Materials Engineering}{Jodhpur, India}
       \resumeItemListStart
-        \resumeItem{Worked on the project ``Novel in-situ volume contractible metal halide negative electrodes for high-performance lithium-ion batteries'', focusing on material characterization and experimental analysis.}
+        \resumeItem{Investigated novel in-situ volume contractible metal halide negative electrodes for high-performance lithium-ion batteries, executing material characterization and experimental data analysis.}
       \resumeItemListEnd
   \resumeSubHeadingListEnd
 
@@ -145,9 +149,10 @@
 \section{Skills}
  \begin{itemize}[leftmargin=0.15in, label={}]
     \small{\item{
-     \textbf{Core CAD / Simulation}{: CETOL, Siemens NX, Open CAD, CATIA V5, Visualization Mockup, Ansys, Ansys Workbench, Product \& Manufacturing Information (PMI)} \\
-     \textbf{PLM \& Data}{: Siemens Teamcenter, Teamcenter Visualization Mockup, NX PLM, SQL} \\
-     \textbf{Programming \& Tools}{: Java, Microsoft Power Platform, Microsoft Power Automate, Microsoft Lists} \\
+     \textbf{Core CAD / Simulation}{: Siemens NX, CETOL (3D VSA / Tolerance Stack-Up), Teamcenter Vis Mockup, CATIA V5, Ansys, Ansys Workbench, Product \& Manufacturing Information (PMI), Open CAD} \\
+     \textbf{Standards \& Methods}{: ASME Y14.5 (GD\&T), 3-2-1 Datum Strategy, Gap \& Flush Analysis, 1D/3D Tolerance Analysis, DFMEA} \\
+     \textbf{PLM \& Data}{: Siemens Teamcenter, NX PLM, SQL} \\
+     \textbf{Automation \& Tools}{: Microsoft Power Automate, Microsoft Lists, Microsoft Power Platform, Java} \\
      \textbf{Languages}{: English, German (Elementary Proficiency)}
     }}
  \end{itemize}
@@ -168,21 +173,21 @@
 \section{Certifications}
  \begin{itemize}[leftmargin=0.15in, label={}]
     \item \small{Certified Lean Six Sigma AI Yellow Belt -- Sparen \& Gewinn Consulting (Aug 2026)}
-    \vspace{-4pt}
+    \vspace{-6pt}
     \item \small{DFMEA-MSR: Design FMEA \& Monitoring System Response (Dec 2025)}
-    \vspace{-4pt}
+    \vspace{-6pt}
     \item \small{Geometric Dimensioning \& Tolerancing (GD\&T) -- Infosys (Mar 2025)}
-    \vspace{-4pt}
+    \vspace{-6pt}
     \item \small{NX PLM-1 Engineering Author -- Infosys (May 2026)}
-    \vspace{-4pt}
+    \vspace{-6pt}
     \item \small{Teamcenter 14.1x Visualization Mockup -- Tata Technologies (Jan 2026)}
-    \vspace{-4pt}
+    \vspace{-6pt}
     \item \small{Product \& Manufacturing Information (PMI) -- Tata Technologies (Dec 2025)}
-    \vspace{-4pt}
+    \vspace{-6pt}
     \item \small{Fundamentals of Finite Element Analysis -- Tata Technologies (Jan 2026)}
-    \vspace{-4pt}
+    \vspace{-6pt}
     \item \small{SOLIDWORKS Certification -- Academy of Skill Dev (Mar 2021)}
-    \vspace{-4pt}
+    \vspace{-6pt}
     \item \small{Design for Additive Manufacturing -- Infosys (Jul 2025)}
  \end{itemize}
 
