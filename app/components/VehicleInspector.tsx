@@ -97,9 +97,9 @@ const ZONES_DATA: Record<VehicleZone, ZoneInfo> = {
     experience: {
       role: "Senior Systems Engineer (Stellantis)",
       company: "Infosys Limited · Mysuru, India",
-      period: "May 2025 – Present",
+      period: "Oct 2026 – Present",
       details:
-        "Leading geometrical assurance engineering (GAE), tolerance stack-up analysis, and digital clearance reviews for Stellantis powertrain and engine programs.",
+        "Leading geometrical assurance engineering (GAE), tolerance stack-up analysis, and digital clearance reviews for Stellantis powertrain and engine programs (previously Systems Engineer from May 2025 – Sep 2026).",
     },
     cameraPos: [3.4, 2.2, 4.2],
     targetPos: [0, 0.4, 0],
@@ -804,8 +804,9 @@ export default function VehicleInspector() {
       const width = cvs.clientWidth;
       const height = cvs.clientHeight;
 
-      const projectPoint = (worldX: number, worldY: number, worldZ: number) => {
-        tempVec.set(worldX, worldY, worldZ);
+      const projectPoint = (localX: number, localY: number, localZ: number) => {
+        tempVec.set(localX, localY, localZ);
+        carGroup.localToWorld(tempVec);
         tempVec.project(cam);
         const visible = tempVec.z < 1;
         return {
@@ -831,6 +832,7 @@ export default function VehicleInspector() {
     // Animation Render Loop
     let animationFrameId: number;
     let hoodCurrentRot = -Math.PI * 0.21;
+    let lastHotspotUpdateTime = 0;
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
@@ -870,8 +872,10 @@ export default function VehicleInspector() {
 
       // Decouple 2D overlay projection from 60fps render loop to prevent main-thread re-render thrashing
       const sceneMoved = isTransitioningRef.current || autoRotateRef.current || hoodIsMoving || needsHotspotUpdate;
-      if (sceneMoved) {
+      const now = performance.now();
+      if (sceneMoved && (now - lastHotspotUpdateTime > 50 || needsHotspotUpdate)) {
         updateHotspots();
+        lastHotspotUpdateTime = now;
         needsHotspotUpdate = false;
       }
     };
@@ -972,11 +976,18 @@ export default function VehicleInspector() {
 
     if (intersects.length > 0) {
       const hit = intersects[0].object;
-      const found = raycastObjectsRef.current.find(
-        (item) => item.mesh === hit || item.mesh.children.includes(hit)
-      );
-      if (found) {
-        selectZone(found.zone);
+      let current: THREE.Object3D | null = hit;
+      let matchedZone: VehicleZone | null = null;
+      while (current) {
+        const found = raycastObjectsRef.current.find((item) => item.mesh === current);
+        if (found) {
+          matchedZone = found.zone;
+          break;
+        }
+        current = current.parent;
+      }
+      if (matchedZone) {
+        selectZone(matchedZone);
       }
     }
   };

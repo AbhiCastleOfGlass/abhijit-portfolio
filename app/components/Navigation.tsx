@@ -12,6 +12,7 @@ const links = [
   { name: "Skills", href: "skills" },
   { name: "Projects", href: "projects" },
   { name: "Certifications", href: "certifications" },
+  { name: "Contact", href: "contact" },
 ];
 
 export default function Navigation() {
@@ -88,10 +89,14 @@ export default function Navigation() {
   };
 
   const handleNavClick = (href: string) => {
-    setMobileMenuOpen(false);
-    setTimeout(() => {
+    if (mobileMenuOpen) {
+      setMobileMenuOpen(false);
+      setTimeout(() => {
+        scrollToSection(href);
+      }, 150);
+    } else {
       scrollToSection(href);
-    }, 150);
+    }
   };
 
   const checkPowerLevel = () => {

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Ruler, Box, Car, Workflow, ShieldCheck, Zap, ArrowUpRight } from "lucide-react";
+import { Ruler, Box, Car, Workflow } from "lucide-react";
 
 export default function About() {
   return (
