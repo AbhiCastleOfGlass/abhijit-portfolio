@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Ruler, Box, Car, Workflow, ShieldCheck, Zap, ArrowUpRight } from "lucide-react";
+import { Ruler, Box, Car, Workflow } from "lucide-react";
 
 export default function About() {
   return (
@@ -128,11 +128,11 @@ export default function About() {
               </div>
 
               <h3 className="font-display text-xl font-bold mb-3">
-                BIW & Trim Assemblies
+                Engine & Powertrain Subsystems
               </h3>
 
               <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                Expertise in Body-in-White (BIW) structures, interior & exterior closures, sheet metal forming, and injection-molded plastic components adhering to ASME Y14.5 and 3-2-1 datum strategies.
+                Specialized in engine packaging, cooling circuits, exhaust routing, and air intake subsystems, applying ASME Y14.5 GD&T and 3-2-1 datum strategies to prevent packaging clashes.
               </p>
             </div>
 
@@ -168,7 +168,7 @@ export default function About() {
               </h3>
 
               <p className="text-muted-foreground leading-relaxed mb-6">
-                Architected automated Microsoft Power Automate and Microsoft Lists pipelines to streamline project management, minimizing operational clutter and significantly enhancing data transparency with the client.
+                Built automated Microsoft Power Automate and Microsoft Lists workflows to optimize engineering tracking, eliminating administrative overhead and enabling real-time collaboration with Stellantis stakeholders.
               </p>
             </div>
 
