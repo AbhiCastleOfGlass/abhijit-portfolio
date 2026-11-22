@@ -37,8 +37,8 @@ export default function Footer() {
   };
 
   return (
-    <footer className="border-t border-border py-12 text-center relative">
-      <div className="container mx-auto px-6">
+    <footer className="border-t border-border py-10 sm:py-12 text-center relative">
+      <div className="container mx-auto px-4 sm:px-6">
         <p className="text-sm text-muted-foreground mb-4">
           &copy; {new Date().getFullYear()} Abhijit Ghosh. Forged with precision.
         </p>

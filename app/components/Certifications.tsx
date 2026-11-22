@@ -25,14 +25,14 @@ export default function Certifications() {
   const aiCerts = certifications.filter(cert => cert.category === 'ai');
 
   return (
-    <section id="certifications" className="py-24 bg-muted/30">
-      <div className="container mx-auto px-6 max-w-6xl">
+    <section id="certifications" className="py-16 sm:py-24 bg-muted/30">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
-          className="mb-16"
+          className="mb-10 sm:mb-16"
         >
           <div className="text-sm font-display font-bold text-primary uppercase tracking-[0.2em] mb-3">
             Certifications
@@ -98,13 +98,13 @@ export default function Certifications() {
             onClick={() => setSelectedCert(null)}
           >
             <button
-              className="absolute top-6 right-6 w-12 h-12 bg-black/50 text-white rounded-full flex items-center justify-center hover:bg-primary transition-colors z-[110]"
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 sm:w-12 sm:h-12 bg-black/50 text-white rounded-full flex items-center justify-center hover:bg-primary transition-colors z-[110]"
               onClick={(e) => {
                 e.stopPropagation();
                 setSelectedCert(null);
               }}
             >
-              <X size={24} />
+              <X size={22} />
             </button>
 
             <div className="w-full max-w-4xl flex flex-col items-center">
@@ -113,7 +113,7 @@ export default function Certifications() {
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
                 transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                className="relative w-full aspect-[4/3] bg-card md:rounded-lg overflow-hidden shadow-2xl mb-4"
+                className="relative w-full aspect-[4/3] bg-card rounded-lg overflow-hidden shadow-2xl mb-4"
                 onClick={(e) => e.stopPropagation()}
               >
                 <Image
@@ -126,7 +126,7 @@ export default function Certifications() {
               <motion.h3
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-white font-display text-xl md:text-2xl font-bold text-center"
+                className="text-white font-display text-lg sm:text-xl md:text-2xl font-bold text-center px-2"
               >
                 {selectedCert.title}
               </motion.h3>
