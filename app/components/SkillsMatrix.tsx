@@ -75,14 +75,14 @@ const getColorClasses = (colorName?: string) => {
 
 export default function SkillsMatrix() {
   return (
-    <section id="skills" className="py-24 bg-muted/30">
-      <div className="container mx-auto px-6 max-w-6xl">
+    <section id="skills" className="py-16 sm:py-24 bg-muted/30">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
-          className="mb-16"
+          className="mb-10 sm:mb-16"
         >
           <div className="text-sm font-display font-bold text-primary uppercase tracking-[0.2em] mb-3">
             Skills
@@ -92,7 +92,7 @@ export default function SkillsMatrix() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {skills.map((skillGroup, index) => {
             const colors = getColorClasses(skillGroup.color);
             return (
@@ -102,7 +102,7 @@ export default function SkillsMatrix() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`bg-card border border-border p-7 rounded-xl transition-all duration-300 ${colors.border} ${colors.shadow} group`}
+                className={`bg-card border border-border p-5 sm:p-7 rounded-xl transition-all duration-300 ${colors.border} ${colors.shadow} group`}
               >
                 <div className="flex items-center gap-3 mb-6">
                   <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${colors.bg}`}>

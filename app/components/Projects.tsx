@@ -8,8 +8,6 @@ import { projects, Project } from "@/lib/data";
 import {
   X,
   ExternalLink,
-  Flame,
-  RotateCw,
   Zap,
   CheckCircle2,
   ShieldAlert,
@@ -71,23 +69,16 @@ export default function Projects() {
   // Category visual styles and icons
   const getCategoryTheme = (category: string) => {
     switch (category) {
-      case "Powertrain Packaging":
+      case "GD&T & Tolerance Tools":
         return {
-          icon: Layers,
+          icon: Sliders,
           pill: "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20",
           accent: "text-amber-500",
           gradient: "from-amber-500/10 via-transparent to-transparent"
         };
-      case "Thermal & Exhaust":
+      case "CAD Reference":
         return {
-          icon: Flame,
-          pill: "bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20",
-          accent: "text-orange-500",
-          gradient: "from-orange-500/10 via-transparent to-transparent"
-        };
-      case "Kinematics & Timing":
-        return {
-          icon: RotateCw,
+          icon: Layers,
           pill: "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border-cyan-500/20",
           accent: "text-cyan-500",
           gradient: "from-cyan-500/10 via-transparent to-transparent"
@@ -110,70 +101,74 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="projects" className="py-16 sm:py-24 md:py-32 relative overflow-hidden">
       {/* Background CAD grid accents */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.1),rgba(255,255,255,0))] dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.15),rgba(0,0,0,0))] pointer-events-none" />
 
-      <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
-          className="mb-12 md:mb-16 text-center max-w-3xl mx-auto"
+          className="mb-10 sm:mb-14 text-center max-w-3xl mx-auto"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase bg-primary/10 text-primary border border-primary/20 mb-4">
             <Compass size={14} />
-            <span>Engineering Studies & Packaging</span>
+            <span>Interactive Engineering Resources</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-foreground text-balance tracking-tight mb-4">
-            Powertrain & Subsystem Packaging Studies
+            Projects &amp; Engineering Tools
           </h2>
           <p className="text-muted-foreground text-sm sm:text-base md:text-lg leading-relaxed text-balance">
-            Authentic 3D tolerance stack-up simulations, thermal envelope modeling, and digital mock-up validations
-            executed across Stellantis OEM engine and underbody subsystems.
+            Interactive web calculators, ASME Y14.5 GD&amp;T reference guides, and CAD workbench systems
+            built for dimensional engineering workflows.
           </p>
         </motion.div>
 
-        {/* Category Filter Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-12 sm:mb-16">
-          {categories.map((category) => {
-            const isSelected = selectedCategory === category;
-            const count =
-              category === "All"
-                ? projects.length
-                : projects.filter((p) => p.category === category).length;
+        {/* Category Filter Tabs (only shown when > 2 projects) */}
+        {projects.length > 2 && (
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-10 sm:mb-14">
+            {categories.map((category) => {
+              const isSelected = selectedCategory === category;
+              const count =
+                category === "All"
+                  ? projects.length
+                  : projects.filter((p) => p.category === category).length;
 
-            return (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`relative px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer flex items-center gap-2 border ${
-                  isSelected
-                    ? "bg-primary text-primary-foreground border-primary shadow-sm"
-                    : "bg-card hover:bg-muted text-muted-foreground hover:text-foreground border-border/70"
-                }`}
-              >
-                <span>{category}</span>
-                <span
-                  className={`px-1.5 py-0.5 rounded-full text-[10px] font-semibold ${
+              return (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`relative px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer flex items-center gap-2 border ${
                     isSelected
-                      ? "bg-primary-foreground/20 text-primary-foreground"
-                      : "bg-muted text-muted-foreground"
+                      ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                      : "bg-card hover:bg-muted text-muted-foreground hover:text-foreground border-border/70"
                   }`}
                 >
-                  {count}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+                  <span>{category}</span>
+                  <span
+                    className={`px-1.5 py-0.5 rounded-full text-[10px] font-semibold ${
+                      isSelected
+                        ? "bg-primary-foreground/20 text-primary-foreground"
+                        : "bg-muted text-muted-foreground"
+                    }`}
+                  >
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        )}
 
         {/* Projects Grid */}
         <motion.div
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+          className={`grid grid-cols-1 md:grid-cols-2 ${
+            filteredProjects.length >= 3 ? "lg:grid-cols-3" : "max-w-5xl mx-auto"
+          } gap-6 sm:gap-8`}
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project) => {
@@ -230,7 +225,7 @@ export default function Projects() {
                   )}
 
                   {/* Card Content Body */}
-                  <div className="p-6 flex-1 flex flex-col">
+                  <div className="p-5 sm:p-6 flex-1 flex flex-col">
                     {project.image && (
                       <div className="flex items-center justify-between mb-3">
                         <div
@@ -376,16 +371,16 @@ export default function Projects() {
               className="relative w-full max-w-3xl max-h-[90vh] sm:max-h-[85vh] bg-card border border-border rounded-t-3xl sm:rounded-2xl shadow-2xl overflow-hidden flex flex-col"
             >
               {/* Modal Technical Header */}
-              <div className="sticky top-0 z-20 px-6 py-4 bg-card/95 backdrop-blur-md border-b border-border flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse" />
-                  <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
-                    Engineering Dossier // {activeModalProject.category}
+              <div className="sticky top-0 z-20 px-4 sm:px-6 py-3.5 sm:py-4 bg-card/95 backdrop-blur-md border-b border-border flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2 min-w-0">
+                  <div className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse shrink-0" />
+                  <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground truncate">
+                    Project Overview // {activeModalProject.category}
                   </span>
                 </div>
                 <button
                   onClick={() => setActiveModalProject(null)}
-                  className="w-8 h-8 rounded-full bg-muted/60 hover:bg-muted text-muted-foreground hover:text-foreground flex items-center justify-center transition-colors cursor-pointer"
+                  className="w-8 h-8 rounded-full bg-muted/60 hover:bg-muted text-muted-foreground hover:text-foreground flex items-center justify-center transition-colors cursor-pointer shrink-0"
                   aria-label="Close modal"
                 >
                   <X size={18} />
@@ -393,7 +388,7 @@ export default function Projects() {
               </div>
 
               {/* Modal Scrollable Content */}
-              <div className="p-6 overflow-y-auto space-y-6 flex-1">
+              <div className="p-4 sm:p-6 overflow-y-auto space-y-5 sm:space-y-6 flex-1">
                 {/* Title & Subtitle */}
                 <div>
                   <h3 className="font-display text-2xl sm:text-3xl font-bold text-foreground mb-2">
@@ -541,15 +536,15 @@ export default function Projects() {
               </div>
 
               {/* Modal Footer */}
-              <div className="p-4 px-6 bg-muted/20 border-t border-border flex items-center justify-between">
-                <span className="text-[11px] font-mono text-muted-foreground">
-                  Stellantis OEM Powertrain Program // Geometrical Assurance Engineering
+              <div className="p-4 sm:px-6 bg-muted/20 border-t border-border flex items-center justify-between gap-3">
+                <span className="text-[11px] font-mono text-muted-foreground truncate">
+                  Engineering Resource // {activeModalProject.category}
                 </span>
                 <button
                   onClick={() => setActiveModalProject(null)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold bg-secondary hover:bg-muted text-foreground transition-colors cursor-pointer"
+                  className="px-4 py-2 rounded-xl text-xs font-semibold bg-secondary hover:bg-muted text-foreground transition-colors cursor-pointer shrink-0"
                 >
-                  Close Dossier
+                  Close
                 </button>
               </div>
             </motion.div>
@@ -568,7 +563,7 @@ export default function Projects() {
             onClick={() => setLightboxImage(null)}
           >
             <button
-              className="absolute top-6 right-6 w-11 h-11 bg-black/60 text-white rounded-full flex items-center justify-center hover:bg-primary transition-colors z-[120] cursor-pointer"
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 sm:w-11 sm:h-11 bg-black/60 text-white rounded-full flex items-center justify-center hover:bg-primary transition-colors z-[120] cursor-pointer"
               onClick={(e) => {
                 e.stopPropagation();
                 setLightboxImage(null);

@@ -6,9 +6,9 @@ import { motion } from "framer-motion";
 
 export default function StackupAnalysisPage() {
   return (
-    <div className="flex flex-col h-screen overflow-hidden bg-background">
+    <div className="flex flex-col h-dvh overflow-hidden bg-background">
       {/* Minimal Header */}
-      <header className="flex-none bg-background/80 backdrop-blur-md border-b border-border shadow-sm py-3 px-6 z-10 flex items-center justify-between">
+      <header className="flex-none bg-background/80 backdrop-blur-md border-b border-border shadow-sm py-3 px-4 sm:px-6 z-10 flex items-center justify-between">
         <Link
           href="/#projects"
           className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors group"

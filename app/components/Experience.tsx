@@ -6,14 +6,14 @@ import Image from "next/image";
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24">
-      <div className="container mx-auto px-6 max-w-4xl">
+    <section id="experience" className="py-16 sm:py-24 overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
-          className="mb-16"
+          className="mb-10 sm:mb-16"
         >
           <div className="text-sm font-display font-bold text-primary uppercase tracking-[0.2em] mb-3">
             Experience
@@ -23,7 +23,7 @@ export default function Experience() {
           </h2>
         </motion.div>
 
-        <div className="relative border-l-2 border-border/60 ml-4 md:ml-0 md:pl-0 pl-6 space-y-12">
+        <div className="relative border-l-2 border-border/60 ml-2.5 sm:ml-4 md:ml-0 md:pl-0 pl-5 sm:pl-6 space-y-8 sm:space-y-12">
           {/* Animated gradient line over the border */}
           <motion.div
             className="absolute top-0 bottom-0 left-[-2px] w-[2px] bg-gradient-to-b from-primary via-blue-500 to-green-500 origin-top"
@@ -43,18 +43,18 @@ export default function Experience() {
               className="relative group md:pl-12"
             >
               {/* Timeline dot */}
-              <div className="absolute left-[-31px] md:left-[-7px] top-1.5 w-3.5 h-3.5 bg-primary rounded-full border-4 border-background transition-all duration-300 group-hover:scale-150 group-hover:shadow-[0_0_12px_rgba(234,88,12,0.6)] z-10" />
+              <div className="absolute left-[-27px] sm:left-[-31px] md:left-[-7px] top-1.5 w-3.5 h-3.5 bg-primary rounded-full border-4 border-background transition-all duration-300 group-hover:scale-150 group-hover:shadow-[0_0_12px_rgba(234,88,12,0.6)] z-10" />
 
               {/* Special styling for the first (current) item dot */}
               {index === 0 && (
-                <div className="absolute left-[-31px] md:left-[-7px] top-1.5 w-3.5 h-3.5 bg-primary rounded-full border-4 border-background shadow-[0_0_0_4px_rgba(234,88,12,0.2)] animate-pulse z-0" />
+                <div className="absolute left-[-27px] sm:left-[-31px] md:left-[-7px] top-1.5 w-3.5 h-3.5 bg-primary rounded-full border-4 border-background shadow-[0_0_0_4px_rgba(234,88,12,0.2)] animate-pulse z-0" />
               )}
 
-              <div className="font-mono text-sm font-medium text-primary mb-3">
+              <div className="font-mono text-xs sm:text-sm font-medium text-primary mb-2.5 sm:mb-3">
                 {exp.startDate} — {exp.endDate}
               </div>
 
-              <div className="bg-card border border-border p-6 md:p-8 rounded-xl transition-all duration-300 hover:shadow-lg hover:border-primary/50 group-hover:translate-x-1">
+              <div className="bg-card border border-border p-5 sm:p-6 md:p-8 rounded-xl transition-all duration-300 hover:shadow-lg hover:border-primary/50 md:group-hover:translate-x-1">
                 <div className="flex justify-between items-start mb-4">
                   <div>
                     <h3 className="font-display text-xl md:text-2xl font-bold mb-1">

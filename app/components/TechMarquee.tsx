@@ -38,17 +38,17 @@ export default function TechMarquee() {
   const duplicatedItems = [...techItems, ...techItems, ...techItems];
 
   return (
-    <div className="py-12 border-y border-border/60 bg-muted/20 relative overflow-hidden">
+    <div className="py-8 sm:py-12 border-y border-border/60 bg-muted/20 relative overflow-hidden">
       {/* Gradient fade masks on left and right */}
-      <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+      <div className="absolute left-0 top-0 bottom-0 w-10 sm:w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-10 sm:w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
       <div className="mask-marquee overflow-hidden">
-        <div className="animate-marquee flex gap-6 py-2">
+        <div className="animate-marquee flex gap-3 sm:gap-6 py-2">
           {duplicatedItems.map((item, index) => (
             <div
               key={`${item.name}-${index}`}
-              className="flex items-center gap-3 px-5 py-3 rounded-xl bg-card border border-border shadow-xs shrink-0 hover:border-primary/50 hover:shadow-md transition-all duration-300 group cursor-default"
+              className="flex items-center gap-2.5 sm:gap-3 px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-card border border-border shadow-xs shrink-0 hover:border-primary/50 hover:shadow-md transition-all duration-300 group cursor-default"
             >
               <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center group-hover:scale-110 transition-transform">
                 {item.icon}

@@ -5,14 +5,14 @@ import { Ruler, Box, Car, Workflow } from "lucide-react";
 
 export default function About() {
   return (
-    <section id="about" className="py-24 bg-muted/30 relative">
-      <div className="container mx-auto px-6 max-w-6xl">
+    <section id="about" className="py-16 sm:py-24 bg-muted/30 relative">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
-          className="mb-16"
+          className="mb-10 sm:mb-16"
         >
           <div className="text-sm font-display font-bold text-primary uppercase tracking-[0.2em] mb-3">
             About Me & Expertise
@@ -31,7 +31,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="md:col-span-2 bg-card border border-border p-8 rounded-2xl relative overflow-hidden group hover:border-primary/50 transition-all duration-300 shadow-sm flex flex-col justify-between"
+            className="md:col-span-2 bg-card border border-border p-5 sm:p-8 rounded-2xl relative overflow-hidden group hover:border-primary/50 transition-all duration-300 shadow-sm flex flex-col justify-between"
           >
             {/* Background ambient glow */}
             <div className="absolute top-0 right-0 w-72 h-72 bg-primary/10 rounded-full blur-[80px] pointer-events-none group-hover:bg-primary/20 transition-all duration-500" />
@@ -56,17 +56,17 @@ export default function About() {
             </div>
 
             {/* Yield Metric Callout Box */}
-            <div className="bg-muted/50 border border-border p-5 rounded-xl flex items-center justify-between flex-wrap gap-4">
+            <div className="bg-muted/50 border border-border p-4 sm:p-5 rounded-xl flex items-center justify-between flex-wrap gap-3 sm:gap-4">
               <div>
                 <span className="text-xs text-muted-foreground uppercase font-semibold block mb-1">
                   Assembly Yield Impact
                 </span>
-                <span className="font-display text-2xl font-bold text-foreground">
+                <span className="font-display text-xl sm:text-2xl font-bold text-foreground">
                   54.34% <span className="text-muted-foreground font-normal">→</span> <span className="text-primary font-bold">99.90%</span>
                 </span>
               </div>
-              <div className="text-xs text-muted-foreground font-medium max-w-[200px]">
-                Recommended critical design & tolerance changes per million units.
+              <div className="text-xs text-muted-foreground font-medium sm:max-w-[200px]">
+                Recommended critical design &amp; tolerance changes per million units.
               </div>
             </div>
           </motion.div>
@@ -77,7 +77,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-card border border-border p-8 rounded-2xl relative overflow-hidden group hover:border-blue-500/50 transition-all duration-300 shadow-sm flex flex-col justify-between"
+            className="bg-card border border-border p-5 sm:p-8 rounded-2xl relative overflow-hidden group hover:border-blue-500/50 transition-all duration-300 shadow-sm flex flex-col justify-between"
           >
             <div className="absolute top-0 right-0 w-48 h-48 bg-blue-500/10 rounded-full blur-[60px] pointer-events-none" />
 
@@ -113,7 +113,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="bg-card border border-border p-8 rounded-2xl relative overflow-hidden group hover:border-green-500/50 transition-all duration-300 shadow-sm flex flex-col justify-between"
+            className="bg-card border border-border p-5 sm:p-8 rounded-2xl relative overflow-hidden group hover:border-green-500/50 transition-all duration-300 shadow-sm flex flex-col justify-between"
           >
             <div className="absolute top-0 right-0 w-48 h-48 bg-green-500/10 rounded-full blur-[60px] pointer-events-none" />
 
@@ -149,7 +149,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="md:col-span-2 bg-card border border-border p-8 rounded-2xl relative overflow-hidden group hover:border-yellow-500/50 transition-all duration-300 shadow-sm flex flex-col justify-between"
+            className="md:col-span-2 bg-card border border-border p-5 sm:p-8 rounded-2xl relative overflow-hidden group hover:border-yellow-500/50 transition-all duration-300 shadow-sm flex flex-col justify-between"
           >
             <div className="absolute top-0 right-0 w-72 h-72 bg-yellow-500/10 rounded-full blur-[80px] pointer-events-none" />
 

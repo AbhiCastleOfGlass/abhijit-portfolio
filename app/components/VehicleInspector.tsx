@@ -340,6 +340,7 @@ type TabKey = "skills" | "achievements" | "projects" | "experience";
 
 export default function VehicleInspector() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const canvasWrapperRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Active state
@@ -887,6 +888,7 @@ export default function VehicleInspector() {
       if (!canvasRef.current || !rendererRef.current || !cameraRef.current) return;
       const width = canvasRef.current.clientWidth;
       const height = canvasRef.current.clientHeight;
+      if (width === 0 || height === 0) return;
       cameraRef.current.aspect = width / height;
       cameraRef.current.updateProjectionMatrix();
       rendererRef.current.setSize(width, height);
@@ -894,7 +896,7 @@ export default function VehicleInspector() {
     };
 
     const resizeObserver = new ResizeObserver(handleResize);
-    resizeObserver.observe(container);
+    resizeObserver.observe(canvasWrapperRef.current || container);
 
     // Cleanup resources on unmount (Three.js WebGL best practices)
     return () => {
@@ -1020,36 +1022,36 @@ export default function VehicleInspector() {
     <section
       ref={containerRef}
       id="vehicle-inspector"
-      className="relative py-24 bg-card/40 border-y border-border/80 overflow-hidden"
+      className="relative py-16 sm:py-24 bg-card/40 border-y border-border/80 overflow-hidden"
     >
       {/* Background ambient glow */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-full max-w-5xl h-96 bg-primary/5 blur-[140px] pointer-events-none -z-10" />
 
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 sm:mb-8 gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-semibold tracking-wider uppercase mb-3">
-              <Sparkles size={14} className="animate-spin text-primary" />
-              Interactive 3D Digital Mockup · Siemens NX & CETOL
+            <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-[11px] sm:text-xs font-semibold tracking-wider uppercase mb-3">
+              <Sparkles size={13} className="animate-spin text-primary shrink-0" />
+              <span>Interactive 3D Digital Mockup · NX &amp; CETOL</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold uppercase tracking-tight">
               Virtual Vehicle <span className="text-primary">Inspector</span>
             </h2>
             <p className="text-muted-foreground text-sm sm:text-base max-w-2xl mt-2">
-              Click on automotive zones — <strong className="text-foreground">Hood & Engine Bay</strong>, Chassis & 3-2-1 Datums, Cockpit, or Exhaust — to inspect micron-level tolerances, achievements, and engineering deliverables.
+              Tap automotive zones — <strong className="text-foreground">Hood &amp; Engine Bay</strong>, Chassis &amp; 3-2-1 Datums, Cockpit, or Exhaust — to inspect micron-level tolerances, achievements, and engineering deliverables.
             </p>
           </div>
 
           {/* Quick Zone Selector Bar */}
-          <div className="flex flex-wrap items-center gap-1.5 p-1.5 rounded-xl bg-card border border-border/80 shadow-xs">
+          <div className="flex items-center gap-1.5 p-1.5 rounded-xl bg-card border border-border/80 shadow-xs overflow-x-auto no-scrollbar sm:flex-wrap max-w-full">
             {(["hood", "chassis", "cockpit", "exhaust", "full"] as VehicleZone[]).map((zone) => {
               const isSelected = activeZone === zone;
               return (
                 <button
                   key={zone}
                   onClick={() => selectZone(zone)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer ${
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap shrink-0 ${
                     isSelected
                       ? "bg-primary text-white shadow-xs"
                       : "text-muted-foreground hover:text-foreground hover:bg-muted"
@@ -1068,9 +1070,9 @@ export default function VehicleInspector() {
         </div>
 
         {/* 3D WebGL Canvas Viewport & Inspection Split Screen */}
-        <div className="relative w-full h-[620px] sm:h-[680px] rounded-2xl border border-border bg-gradient-to-b from-card/90 to-background/90 shadow-xl overflow-hidden flex flex-col lg:flex-row">
+        <div className="relative w-full h-auto lg:h-[680px] rounded-2xl border border-border bg-gradient-to-b from-card/90 to-background/90 shadow-xl overflow-hidden flex flex-col lg:flex-row">
           {/* Canvas Area */}
-          <div className="relative flex-1 h-full w-full">
+          <div ref={canvasWrapperRef} className="relative h-[300px] sm:h-[380px] lg:h-full lg:flex-1 w-full shrink-0">
             <canvas
               ref={canvasRef}
               onPointerDown={handlePointerDown}
@@ -1079,7 +1081,7 @@ export default function VehicleInspector() {
               className="w-full h-full block touch-none"
             />
 
-            {/* Floating 3D Projected Hotspot Badges on Canvas */}
+            {/* Floating 3D Projected Hotspot Badges on Canvas (sm+ only to keep mobile viewport uncluttered) */}
             {hotspotPositions.hood?.visible && (
               <button
                 onClick={() => selectZone("hood")}
@@ -1087,7 +1089,7 @@ export default function VehicleInspector() {
                   left: `${hotspotPositions.hood.x}px`,
                   top: `${hotspotPositions.hood.y}px`,
                 }}
-                className={`absolute -translate-x-1/2 -translate-y-1/2 pointer-events-auto flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold transition-all transform hover:scale-110 shadow-lg ${
+                className={`hidden sm:flex absolute -translate-x-1/2 -translate-y-1/2 pointer-events-auto items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold transition-all transform hover:scale-110 shadow-lg ${
                   activeZone === "hood"
                     ? "bg-primary text-white ring-4 ring-primary/30"
                     : "bg-card/90 text-foreground border border-primary/40 backdrop-blur-md hover:bg-primary hover:text-white"
@@ -1106,7 +1108,7 @@ export default function VehicleInspector() {
                   left: `${hotspotPositions.chassis.x}px`,
                   top: `${hotspotPositions.chassis.y}px`,
                 }}
-                className={`absolute -translate-x-1/2 -translate-y-1/2 pointer-events-auto flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold transition-all transform hover:scale-110 shadow-lg ${
+                className={`hidden sm:flex absolute -translate-x-1/2 -translate-y-1/2 pointer-events-auto items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold transition-all transform hover:scale-110 shadow-lg ${
                   activeZone === "chassis"
                     ? "bg-primary text-white ring-4 ring-primary/30"
                     : "bg-card/90 text-foreground border border-border backdrop-blur-md hover:bg-primary hover:text-white"
@@ -1124,7 +1126,7 @@ export default function VehicleInspector() {
                   left: `${hotspotPositions.cockpit.x}px`,
                   top: `${hotspotPositions.cockpit.y}px`,
                 }}
-                className={`absolute -translate-x-1/2 -translate-y-1/2 pointer-events-auto flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold transition-all transform hover:scale-110 shadow-lg ${
+                className={`hidden sm:flex absolute -translate-x-1/2 -translate-y-1/2 pointer-events-auto items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold transition-all transform hover:scale-110 shadow-lg ${
                   activeZone === "cockpit"
                     ? "bg-primary text-white ring-4 ring-primary/30"
                     : "bg-card/90 text-foreground border border-border backdrop-blur-md hover:bg-primary hover:text-white"
@@ -1142,7 +1144,7 @@ export default function VehicleInspector() {
                   left: `${hotspotPositions.exhaust.x}px`,
                   top: `${hotspotPositions.exhaust.y}px`,
                 }}
-                className={`absolute -translate-x-1/2 -translate-y-1/2 pointer-events-auto flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold transition-all transform hover:scale-110 shadow-lg ${
+                className={`hidden sm:flex absolute -translate-x-1/2 -translate-y-1/2 pointer-events-auto items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold transition-all transform hover:scale-110 shadow-lg ${
                   activeZone === "exhaust"
                     ? "bg-primary text-white ring-4 ring-primary/30"
                     : "bg-card/90 text-foreground border border-border backdrop-blur-md hover:bg-primary hover:text-white"
@@ -1153,65 +1155,66 @@ export default function VehicleInspector() {
               </button>
             )}
 
-            {/* Interactive Viewport Controls Toolbar (Bottom Left) */}
-            <div className="absolute bottom-4 left-4 z-20 flex flex-wrap items-center gap-2 p-2 rounded-xl bg-card/85 backdrop-blur-md border border-border/80 shadow-md">
+            {/* Interactive Viewport Controls Toolbar */}
+            <div className="absolute bottom-2.5 sm:bottom-4 left-2.5 sm:left-4 right-2.5 sm:right-auto z-20 flex items-center gap-1.5 sm:gap-2 p-1.5 sm:p-2 rounded-xl bg-card/85 backdrop-blur-md border border-border/80 shadow-md overflow-x-auto no-scrollbar">
               {/* Hood Open/Close Toggle */}
               <button
                 onClick={() => setIsHoodOpen(!isHoodOpen)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-semibold transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                   isHoodOpen
                     ? "bg-primary/20 text-primary border border-primary/30"
                     : "hover:bg-muted text-muted-foreground hover:text-foreground"
                 }`}
                 title="Open or close car hood to inspect engine compartment"
               >
-                <Flame size={14} className={isHoodOpen ? "text-primary animate-pulse" : ""} />
+                <Flame size={13} className={isHoodOpen ? "text-primary animate-pulse" : ""} />
                 <span>Hood: {isHoodOpen ? "Open" : "Closed"}</span>
               </button>
 
               {/* Wireframe / CAD X-Ray Toggle */}
               <button
                 onClick={() => setWireframeMode(!wireframeMode)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-semibold transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                   wireframeMode
                     ? "bg-primary text-white shadow-xs"
                     : "hover:bg-muted text-muted-foreground hover:text-foreground"
                 }`}
                 title="Toggle CAD Wireframe X-Ray mode"
               >
-                <Eye size={14} />
-                <span>{wireframeMode ? "CAD Wireframe" : "PBR Solid"}</span>
+                <Eye size={13} />
+                <span>{wireframeMode ? "Wireframe" : "Solid"}</span>
               </button>
 
               {/* Auto-Rotate Toggle */}
               <button
                 onClick={() => setAutoRotate(!autoRotate)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-semibold transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                   autoRotate
                     ? "bg-primary/20 text-primary border border-primary/30"
                     : "hover:bg-muted text-muted-foreground hover:text-foreground"
                 }`}
                 title="Toggle 360° automatic turntable rotation"
               >
-                <RotateCw size={14} className={autoRotate ? "animate-spin" : ""} />
-                <span>Auto-Rotate</span>
+                <RotateCw size={13} className={autoRotate ? "animate-spin" : ""} />
+                <span>Rotate</span>
               </button>
 
               {/* Reset View */}
               <button
                 onClick={() => selectZone("full")}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-muted text-muted-foreground hover:text-foreground transition-all cursor-pointer"
+                className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-semibold hover:bg-muted text-muted-foreground hover:text-foreground transition-all cursor-pointer whitespace-nowrap shrink-0"
                 title="Reset camera to full vehicle view"
               >
-                <Maximize2 size={14} />
-                <span>Reset View</span>
+                <Maximize2 size={13} />
+                <span>Reset</span>
               </button>
             </div>
 
             {/* Instruction Tip Overlay */}
-            <div className="absolute top-4 left-4 pointer-events-none hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-card/75 backdrop-blur-md border border-border/60 text-xs text-muted-foreground">
+            <div className="absolute top-3 sm:top-4 left-3 sm:left-4 pointer-events-none flex items-center gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-card/75 backdrop-blur-md border border-border/60 text-[11px] sm:text-xs text-muted-foreground">
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-ping" />
-              <span>Rotate 360° · Scroll to Zoom · Click components to inspect</span>
+              <span className="sm:hidden">Drag to rotate · Pinch to zoom</span>
+              <span className="hidden sm:inline">Rotate 360° · Scroll to Zoom · Click components to inspect</span>
             </div>
           </div>
 
@@ -1224,10 +1227,10 @@ export default function VehicleInspector() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
                 transition={{ duration: 0.25 }}
-                className="w-full lg:w-[440px] xl:w-[480px] h-[340px] lg:h-full bg-card/95 border-t lg:border-t-0 lg:border-l border-border backdrop-blur-xl flex flex-col z-20 overflow-hidden"
+                className="w-full lg:w-[440px] xl:w-[480px] h-auto max-h-[460px] lg:max-h-none lg:h-full bg-card/95 border-t lg:border-t-0 lg:border-l border-border backdrop-blur-xl flex flex-col z-20 overflow-hidden"
               >
                 {/* Drawer Header */}
-                <div className="p-5 border-b border-border/80 flex items-start justify-between gap-3 bg-muted/30">
+                <div className="p-4 sm:p-5 border-b border-border/80 flex items-start justify-between gap-3 bg-muted/30">
                   <div>
                     <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-primary/10 border border-primary/20 text-primary text-[11px] font-bold tracking-wider uppercase mb-1.5">
                       {currentZoneData.badge}

@@ -107,19 +107,19 @@ export default function Navigation() {
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-background/80 backdrop-blur-md border-b border-border shadow-sm py-3"
-          : "bg-transparent py-5"
+          ? "bg-background/85 backdrop-blur-md border-b border-border shadow-sm py-3"
+          : "bg-background/60 sm:bg-transparent backdrop-blur-sm sm:backdrop-blur-none py-3.5 sm:py-5"
       }`}
     >
-      <div className="container mx-auto px-6 max-w-6xl flex items-center justify-between">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl flex items-center justify-between">
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="flex items-center gap-2 group outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
         >
-          <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_0_12px_rgba(234,88,12,0.4)] group-hover:shadow-[0_0_16px_rgba(234,88,12,0.6)] transition-all">
+          <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_0_12px_rgba(234,88,12,0.4)] group-hover:shadow-[0_0_16px_rgba(234,88,12,0.6)] transition-all shrink-0">
             <span className="text-white text-sm">★</span>
           </div>
-          <span className="font-display font-bold text-xl tracking-wider uppercase hidden sm:block">Abhijit Ghosh</span>
+          <span className="font-display font-bold text-base sm:text-xl tracking-wider uppercase">Abhijit Ghosh</span>
         </button>
 
         {/* Desktop Nav */}
