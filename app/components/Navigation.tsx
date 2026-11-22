@@ -21,6 +21,7 @@ export default function Navigation() {
   const [activeSection, setActiveSection] = useState("");
   const [isDark, setIsDark] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [powerLevel, setPowerLevel] = useState<number | null>(null);
 
   // Handle scroll events
   useEffect(() => {
@@ -99,8 +100,16 @@ export default function Navigation() {
     }
   };
 
+  useEffect(() => {
+    if (powerLevel === null) return;
+    const timer = setTimeout(() => setPowerLevel(null), 3200);
+    return () => clearTimeout(timer);
+  }, [powerLevel]);
+
   const checkPowerLevel = () => {
-    alert("IT'S OVER 9000! 🐉"); // Simplified easter egg for now
+    // Random Scouter reading between 9,001 and 99,999
+    const reading = Math.floor(Math.random() * 90999) + 9001;
+    setPowerLevel(reading);
   };
 
   return (
@@ -197,7 +206,10 @@ export default function Navigation() {
               ))}
               <div className="pt-2 mt-2 border-t border-border">
                 <button
-                  onClick={checkPowerLevel}
+                  onClick={() => {
+                    checkPowerLevel();
+                    setMobileMenuOpen(false);
+                  }}
                   className="w-full flex items-center gap-2 px-4 py-3 text-left rounded-md font-medium text-muted-foreground hover:bg-muted hover:text-foreground"
                 >
                   <Zap size={16} className="text-primary" />
@@ -205,6 +217,38 @@ export default function Navigation() {
                 </button>
               </div>
             </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Non-blocking Scouter HUD Toast */}
+      <AnimatePresence>
+        {powerLevel !== null && (
+          <motion.div
+            initial={{ opacity: 0, y: -12, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -12, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            role="status"
+            aria-live="polite"
+            className="fixed top-20 right-4 sm:right-6 z-[60] px-4 py-2.5 rounded-xl bg-card/95 backdrop-blur-md border border-primary/40 shadow-lg flex items-center gap-3"
+          >
+            <div className="w-2.5 h-2.5 rounded-full bg-primary animate-ping shrink-0" />
+            <div className="font-mono text-xs">
+              <div className="text-[10px] uppercase tracking-widest text-muted-foreground">
+                Scouter Reading
+              </div>
+              <div className="text-sm font-bold text-primary tabular-nums">
+                {powerLevel.toLocaleString()} <span className="text-foreground/80 font-normal">· OVER 9,000!</span>
+              </div>
+            </div>
+            <button
+              onClick={() => setPowerLevel(null)}
+              className="p-1 text-muted-foreground hover:text-foreground rounded cursor-pointer"
+              aria-label="Dismiss scouter reading"
+            >
+              <X size={14} />
+            </button>
           </motion.div>
         )}
       </AnimatePresence>

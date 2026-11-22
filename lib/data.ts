@@ -175,14 +175,14 @@ export const skills: SkillCategory[] = [
     color: "green"
   },
   {
-    category: "Measurement & Quality",
+    category: "Quality & Analysis",
     icon: "gauge",
     tags: [
-      "CMM Fundamentals",
-      "Check Fixtures",
-      "Inspection Reports",
-      "SPC / Cp / Cpk",
-      "DFMEA-MSR"
+      "DFMEA-MSR",
+      "Lean Six Sigma (Yellow Belt)",
+      "PMI",
+      "Structural FEA (Ansys)",
+      "Design for Additive Mfg"
     ],
     color: "yellow"
   },
@@ -195,19 +195,20 @@ export const skills: SkillCategory[] = [
       "Air Intake Packaging",
       "Exhaust Systems",
       "Castings & Sheet Metal",
-      "Additive Manufacturing"
+      "Open CAD"
     ],
     color: "purple"
   },
   {
-    category: "Programming & Tools",
+    category: "Programming & Languages",
     icon: "code-2",
     tags: [
       "Java",
       "Power Platform",
       "Power Automate",
-      "Prompt Engineering",
-      "MS Office"
+      "Microsoft Lists",
+      "English",
+      "German (Elementary)"
     ],
     color: "gray"
   }
@@ -378,7 +379,7 @@ export const education: Education[] = [
 
 export const stats: Stat[] = [
   { label: "Assembly Yield", value: 99.9, suffix: "%" },
-  { label: "Interface Zones", value: 15, suffix: "+" },
+  { label: "CAD & Sim Tools", value: 6 },
   { label: "Certifications", value: 9 }
 ];
 

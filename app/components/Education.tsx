@@ -79,7 +79,7 @@ export default function Education() {
                 Recognition
               </div>
               <h2 className="text-3xl md:text-4xl font-display font-bold text-balance">
-                Battle trophies
+                Awards &amp; Recognition
               </h2>
             </motion.div>
 

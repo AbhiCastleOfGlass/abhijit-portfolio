@@ -157,7 +157,7 @@ export default function Contact() {
                 Curriculum Vitae
               </h3>
               <p className="text-xs sm:text-sm text-muted-foreground mb-4 leading-relaxed">
-                Authentic single-page master GAE resume with verified Stellantis powertrain packaging studies.
+                Single-page GAE resume covering CETOL 3D tolerance analysis, Siemens NX, and Teamcenter Vis Mockup.
               </p>
             </div>
 

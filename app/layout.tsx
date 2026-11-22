@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://abhijit-portfolio.vercel.app", // Update this when you have a real domain
+    url: "https://abhijittorq.vercel.app",
     title: "Abhijit Ghosh — Senior Systems Engineer | GAE & Dimensional Management",
     description: "Portfolio of a Senior Systems Engineer specializing in tolerance stack-up analysis (CETOL), GD&T, Siemens NX, and automotive dimensional management.",
     siteName: "Abhijit Ghosh Portfolio",

@@ -52,23 +52,23 @@ const ZONES_DATA: Record<VehicleZone, ZoneInfo> = {
       "Integrated virtual vehicle validation using Siemens NX and Teamcenter Vis Mockup. Micron-level dimensional convergence across Powertrain, Cooling, and Underbody structures.",
     metrics: [
       { label: "Assembly Yield", value: "99.90%" },
-      { label: "Interface Zones", value: "15+" },
-      { label: "Engineering Standard", value: "ASME Y14.5" },
+      { label: "Core Stack-Up", value: "CETOL 3D" },
+      { label: "Standard", value: "ASME Y14.5" },
     ],
     skills: [
       {
         name: "Siemens NX (Primary)",
-        level: "Expert",
+        level: "Daily CAD",
         description: "Primary daily CAD modeling, parametric design modifications, and PMI authoring.",
       },
       {
         name: "CETOL 3D VSA",
-        level: "Advanced",
+        level: "Core Tool",
         description: "3D variation simulation and statistical tolerance stack-up analysis.",
       },
       {
         name: "Teamcenter Vis Mockup",
-        level: "Advanced",
+        level: "Certified",
         description: "Full-vehicle digital mockup, dynamic clash detection, and gap/flush reviews.",
       },
       {
@@ -79,8 +79,8 @@ const ZONES_DATA: Record<VehicleZone, ZoneInfo> = {
     ],
     achievements: [
       "Increased powertrain subsystem assembly yield from 54.34% to 99.90% per million units by executing 3D variation simulation in CETOL.",
-      "Conducted 3D tolerance stack-up analysis across engine cooling circuits and air intake packaging, mitigating high-risk assembly variation before tooling freeze.",
-      "Standardized 3-2-1 datum locating strategies across multiple Stellantis powertrain programs.",
+      "Conducted 3D tolerance stack-up analysis across engine cooling circuits and air intake packaging to mitigate assembly variation before tooling freeze.",
+      "Applied 3-2-1 datum locating strategies and ASME Y14.5 GD&T standards across Stellantis powertrain reviews.",
     ],
     projects: [
       {
@@ -89,7 +89,7 @@ const ZONES_DATA: Record<VehicleZone, ZoneInfo> = {
         link: "/projects/stackup-analysis",
       },
       {
-        title: "Catia Learning Path",
+        title: "CATIA V5 Workbench System",
         desc: "Visual reference covering 12 CATIA V5 workbenches including Part Design, Assembly, and DMU Navigator.",
         link: "/projects/catia-v5",
       },
@@ -99,7 +99,7 @@ const ZONES_DATA: Record<VehicleZone, ZoneInfo> = {
       company: "Infosys Limited · Mysuru, India",
       period: "Oct 2026 – Present",
       details:
-        "Leading geometrical assurance engineering (GAE), tolerance stack-up analysis, and digital clearance reviews for Stellantis powertrain and engine programs (previously Systems Engineer from May 2025 – Sep 2026).",
+        "Executing geometrical assurance engineering (GAE), tolerance stack-up analysis, and digital clearance reviews for Stellantis powertrain and engine programs (previously Systems Engineer from May 2025 – Sep 2026).",
     },
     cameraPos: [3.4, 2.2, 4.2],
     targetPos: [0, 0.4, 0],
@@ -114,23 +114,23 @@ const ZONES_DATA: Record<VehicleZone, ZoneInfo> = {
       "Core engineering focus: 3D tolerance stack-up, cooling pipe routing, air intake clearances, and ASME Y14.5 GD&T allocation across high-temperature engine bay interfaces.",
     metrics: [
       { label: "Assembly Yield", value: "99.90%" },
-      { label: "Defect Reduction", value: "99.78% Cut" },
+      { label: "Baseline Yield", value: "54.34%" },
       { label: "Tolerance Model", value: "CETOL 3D" },
     ],
     skills: [
       {
         name: "Engine Cooling Circuits",
-        level: "Core Expertise",
+        level: "Core Domain",
         description: "Packaging coolant hoses, radiator fittings, and thermal expansion gap budgets.",
       },
       {
         name: "Air Intake Packaging",
-        level: "Core Expertise",
+        level: "Core Domain",
         description: "Manifold clearance analysis, intake tube routing, and vibration isolation clearances.",
       },
       {
         name: "CETOL 3D Tolerance Stack-Up",
-        level: "Advanced",
+        level: "Core Tool",
         description: "Worst-case (WC) and Root-Sum-Square (RSS) variation simulation on critical engine interfaces.",
       },
       {
@@ -141,17 +141,13 @@ const ZONES_DATA: Record<VehicleZone, ZoneInfo> = {
     ],
     achievements: [
       "Increased powertrain subsystem assembly yield from 54.34% to 99.90% per million units by executing 3D variation simulation in CETOL and reallocating critical GD&T tolerances.",
-      "Conducted 3D tolerance stack-up analysis in CETOL and Siemens NX across engine cooling circuits and air intake packaging, mitigating high-risk assembly variation before tooling freeze.",
-      "Eliminated interference between engine block brackets, radiator hard lines, and intake ducting through virtual clash analysis.",
+      "Conducted 3D tolerance stack-up analysis in CETOL and Siemens NX across engine cooling circuits and air intake packaging to mitigate assembly variation.",
+      "Reviewed and confirmed clearances between engine brackets, cooling lines, and intake ducting in Teamcenter Vis Mockup.",
     ],
     projects: [
       {
-        title: "Powertrain Cooling Line Clearance Study",
-        desc: "Virtual mockup validation in Teamcenter Vis Mockup ensuring dynamic clearance under engine roll.",
-      },
-      {
         title: "1D Stack Up Calculation Tool",
-        desc: "Standardized tolerance stack-up tool and ASME Y14.5 cheat sheets for engineering teams.",
+        desc: "Interactive tolerance stack-up calculator and ASME Y14.5 cheat sheets for engineering teams.",
         link: "/projects/stackup-analysis",
       },
     ],
@@ -160,7 +156,7 @@ const ZONES_DATA: Record<VehicleZone, ZoneInfo> = {
       company: "Infosys Limited",
       period: "Oct 2026 – Present",
       details:
-        "Engine & Powertrain subsystems (Cooling circuits, exhaust systems, air intake packaging). Responsible for dimensional convergence before physical prototype freeze.",
+        "Engine & Powertrain subsystems (cooling circuits, exhaust systems, air intake packaging). Supporting dimensional convergence prior to tooling milestones.",
     },
     cameraPos: [1.8, 1.7, 2.6],
     targetPos: [0, 0.55, 0.95],
@@ -170,45 +166,46 @@ const ZONES_DATA: Record<VehicleZone, ZoneInfo> = {
     id: "chassis",
     title: "Chassis & 3-2-1 Datum Strategy",
     badge: "DIMENSIONAL MANAGEMENT & VSA",
-    subtitle: "Underbody Subframe, Suspension Mountings & Locating Scheme",
+    subtitle: "Underbody Subframe, Mounting Interfaces & Locating Scheme",
     summary:
-      "Establishing deterministic 3-2-1 datum reference frames (Primary A plane, Secondary B 2-way pin, Tertiary C 4-way slot) to eliminate degrees of freedom and secure assembly repeatability.",
+      "Applying deterministic 3-2-1 datum reference frames (Primary A plane, Secondary B 2-way pin, Tertiary C 4-way slot) to constrain degrees of freedom and maintain assembly repeatability.",
     metrics: [
-      { label: "Nominal Gap/Flush", value: "3.5 ±0.5 mm" },
-      { label: "Datum Scheme", value: "3-2-1 Strategy" },
-      { label: "CMM Repeatability", value: "Sub-Micron" },
+      { label: "Datum Scheme", value: "3-2-1" },
+      { label: "GD&T Standard", value: "ASME Y14.5" },
+      { label: "Analysis Tool", value: "CETOL 3D" },
     ],
     skills: [
       {
         name: "3-2-1 Datum Scheme",
-        level: "Mastery",
-        description: "Deterministic 6-DOF constraint strategy across subframes and chassis mounts.",
+        level: "Core Competency",
+        description: "Deterministic 6-DOF constraint strategy across structural brackets and mounting interfaces.",
       },
       {
         name: "Variation Simulation (VSA)",
-        level: "Advanced",
-        description: "Monte Carlo simulation predicting manufacturing yield and locating pin clearances.",
+        level: "Core Tool",
+        description: "Statistical tolerance simulation predicting assembly yield and locating pin clearances.",
       },
       {
         name: "Gap & Flush Analysis",
-        level: "Advanced",
-        description: "Measuring wheel-arch and panel convergence against vehicle design styling targets.",
+        level: "Applied",
+        description: "Evaluating interface clearances and alignment against engineering targets.",
       },
       {
-        name: "CMM Alignment Protocols",
-        level: "Applied",
-        description: "Aligning physical inspection coordinate measurement machines to CAD datum features.",
+        name: "PMI Authoring",
+        level: "Certified",
+        description: "Embedding 3D Product & Manufacturing Information directly onto Siemens NX CAD models.",
       },
     ],
     achievements: [
-      "Applied ASME Y14.5 GD&T standards and 3-2-1 datum strategies in cross-functional design reviews to ensure dimensional repeatability and prevent build defects.",
-      "Optimized locator pin and slot tolerance stack-ups for front suspension subframe mounts, eliminating over-constraint conditions.",
-      "Established clear datum flow-down from full vehicle assembly down to individual fabricated chassis brackets.",
+      "Applied ASME Y14.5 GD&T standards and 3-2-1 datum strategies in cross-functional design reviews to maintain dimensional accuracy and reduce build issues.",
+      "Evaluated locator pin and slot tolerance stack-ups to prevent over-constraint conditions across mating assemblies.",
+      "Supported datum alignment reviews between CAD models and manufacturing engineering teams.",
     ],
     projects: [
       {
-        title: "Subframe Datum Convergence Protocol",
-        desc: "Deterministic datum hierarchy mapping chassis pickup points to body underbody datum planes.",
+        title: "1D Stack Up Calculation Tool",
+        desc: "Interactive 1D RSS & worst-case loop calculator and ASME Y14.5 datum reference guide.",
+        link: "/projects/stackup-analysis",
       },
     ],
     experience: {
@@ -216,7 +213,7 @@ const ZONES_DATA: Record<VehicleZone, ZoneInfo> = {
       company: "Infosys Limited",
       period: "May 2025 – Sep 2026",
       details:
-        "Formulated datum schemes and conducted 3D variation analysis across chassis and powertrain interface zones.",
+        "Applied datum schemes and conducted 3D tolerance stack-up analysis across powertrain and structural interface zones.",
     },
     cameraPos: [2.5, 0.9, 1.6],
     targetPos: [0.8, 0.3, 0.7],
@@ -226,19 +223,19 @@ const ZONES_DATA: Record<VehicleZone, ZoneInfo> = {
     id: "cockpit",
     title: "Digital Mockup & Clash Clearance",
     badge: "VIRTUAL VALIDATION & DFMEA",
-    subtitle: "Teamcenter Vis Mockup, Firewall Packaging & Change Workflows",
+    subtitle: "Teamcenter Vis Mockup, Clearance Reviews & Change Workflows",
     summary:
-      "Cross-functional digital mockup validation in Teamcenter 14.1x Vis Mockup. Resolving dynamic interference between powertrain assemblies, cabin firewalls, and electrical harnesses.",
+      "Cross-functional digital mockup validation in Teamcenter 14.1x Vis Mockup. Reviewing clearances between mating assemblies and automating project tracking workflows.",
     metrics: [
-      { label: "Tooling Clashes", value: "0 at Freeze" },
-      { label: "Workflow Automation", value: "Power Automate" },
-      { label: "Risk Mitigation", value: "DFMEA-MSR" },
+      { label: "DMU Platform", value: "Vis Mockup" },
+      { label: "Automation", value: "Power Automate" },
+      { label: "Risk Method", value: "DFMEA-MSR" },
     ],
     skills: [
       {
         name: "Teamcenter 14.1x Vis Mockup",
         level: "Certified",
-        description: "Dynamic clash detection, sectional clearance cuts, and kinematic sweep envelopes.",
+        description: "Dynamic clash detection, sectional clearance cuts, and digital assembly reviews.",
       },
       {
         name: "DFMEA-MSR",
@@ -248,23 +245,24 @@ const ZONES_DATA: Record<VehicleZone, ZoneInfo> = {
       {
         name: "Microsoft Power Automate",
         level: "Applied",
-        description: "Automated engineering issue tracking and change management workflows.",
+        description: "Automated engineering tracking and project management workflows using Power Automate & Lists.",
       },
       {
         name: "Cross-Functional Reviews",
-        level: "Lead",
-        description: "Collaborating with Stellantis design, manufacturing, and supplier quality teams.",
+        level: "Applied",
+        description: "Collaborating with Stellantis design, manufacturing, and quality teams.",
       },
     ],
     achievements: [
-      "Performed dynamic clash and gap/flush analyses in Teamcenter Vis Mockup, resolving clearance violations across critical powertrain packaging interfaces.",
-      "Built automated engineering issue tracking and change management workflows using Microsoft Power Automate, eliminating administrative reporting overhead and enabling real-time change tracking.",
+      "Performed dynamic clash and clearance analyses in Teamcenter Vis Mockup, resolving clearance violations across powertrain packaging interfaces.",
+      "Built automated project tracking workflows using Microsoft Power Automate and Lists, cutting administrative clutter and improving data transparency.",
       "Earned certified credential in Teamcenter 14.1x Visualization Mockup (Tata Technologies).",
     ],
     projects: [
       {
-        title: "Automated Change Management Workflow",
-        desc: "Power Automate pipeline syncing engineering action items with Stellantis project stakeholders.",
+        title: "CATIA V5 Workbench System",
+        desc: "Visual reference covering 12 CATIA V5 workbenches including DMU Navigator and Assembly Design.",
+        link: "/projects/catia-v5",
       },
     ],
     experience: {
@@ -272,7 +270,7 @@ const ZONES_DATA: Record<VehicleZone, ZoneInfo> = {
       company: "Infosys Limited",
       period: "Oct 2024 – Present",
       details:
-        "Orchestrating digital mockups, issue resolution matrices, and technical change requests across global engineering teams.",
+        "Conducting digital mockup clearance checks, tolerance reviews, and automated tracking workflows for the Stellantis program.",
     },
     cameraPos: [0.1, 2.1, 2.2],
     targetPos: [0, 0.75, 0.05],
@@ -284,43 +282,44 @@ const ZONES_DATA: Record<VehicleZone, ZoneInfo> = {
     badge: "THERMAL & VIBRATION GAE",
     subtitle: "Hot-End & Cold-End Routing, Thermal Expansion & Isolator Mounts",
     summary:
-      "Analyzing hot-end thermal displacement, exhaust hanger rubber isolator compliance, and heat shield nominal clearances under dynamic thermal and vibration duty cycles.",
+      "Evaluating exhaust routing clearances, hanger bracket stack-ups, and heat shield nominal gaps under thermal and vibration operating conditions.",
     metrics: [
-      { label: "Thermal Budget", value: "±8.0 mm Max" },
       { label: "CAD System", value: "Siemens NX" },
+      { label: "DMU Check", value: "Vis Mockup" },
       { label: "Assembly Yield", value: "99.90%" },
     ],
     skills: [
       {
         name: "Exhaust Line 3D Routing",
-        level: "Core Competency",
-        description: "Routing exhaust pipes and mufflers with thermal growth envelopes in Siemens NX.",
+        level: "Core Domain",
+        description: "Reviewing exhaust pipes and mufflers with thermal expansion clearances in Siemens NX.",
       },
       {
-        name: "Thermal Growth Calculations",
+        name: "Clearance Verification",
         level: "Applied",
-        description: "Calculating delta-L thermal elongation across stainless steel exhaust tubes.",
+        description: "Confirming clearances between exhaust components, heat shields, and adjacent underbody parts.",
       },
       {
-        name: "Hanger & Isolator Tolerance",
+        name: "Hanger & Bracket Tolerances",
         level: "Applied",
-        description: "Rubber bushing deflection and bracket tolerance stack-up analysis.",
+        description: "Evaluating bracket and isolator mounting tolerance stack-ups in CETOL.",
       },
       {
         name: "Sheet Metal Heat Shields",
         level: "Applied",
-        description: "Forming clearances, attachment datum schemes, and rattle prevention.",
+        description: "Checking attachment datum schemes and clearance margins against adjacent panels.",
       },
     ],
     achievements: [
-      "Modeled 3D thermal expansion envelopes for exhaust system components, ensuring clearance to chassis cross-members.",
-      "Optimized hanger bracket tolerance stack-ups in CETOL to prevent exhaust rattles and body contact under dynamic vibration.",
-      "Integrated heat shield packaging with underbody aerodynamic panels in Siemens NX.",
+      "Reviewed 3D clearances for exhaust system components against adjacent heat shields and underbody structures.",
+      "Evaluated hanger bracket tolerance stack-ups in CETOL to prevent interference under operating variation.",
+      "Supported heat shield and underbody packaging reviews in Siemens NX and Teamcenter Vis Mockup.",
     ],
     projects: [
       {
-        title: "Exhaust Hot-End Thermal Stack-Up",
-        desc: "Tolerance allocation on catalytic converter brackets and flex-pipe isolators.",
+        title: "1D Stack Up Calculation Tool",
+        desc: "Interactive tolerance stack-up calculator and DFM guidelines for sheet metal and machined brackets.",
+        link: "/projects/stackup-analysis",
       },
     ],
     experience: {

@@ -19,7 +19,7 @@ export default function Experience() {
             Experience
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-balance">
-            The training arc so far
+            Career progression
           </h2>
         </motion.div>
 
